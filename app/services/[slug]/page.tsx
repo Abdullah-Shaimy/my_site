@@ -31,11 +31,12 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
       <section
         style={{
           background: isDesign
-            ? "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 50%, #fdf2f8 100%)"
-            : "linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #f0f9ff 100%)",
+            ? "linear-gradient(135deg, var(--bg-secondary) 0%, rgba(139, 92, 246, 0.05) 50%, rgba(236, 72, 153, 0.05) 100%)"
+            : "linear-gradient(135deg, var(--bg-secondary) 0%, rgba(59, 130, 246, 0.05) 50%, rgba(8, 8, 18, 0.05) 100%)",
           padding: "64px 24px 56px",
           position: "relative",
           overflow: "hidden",
+          borderBottom: "1px solid var(--glass-border)",
         }}
       >
         <div className="container-custom">
@@ -181,14 +182,15 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
                   {service.features.map((feature) => (
                     <div
                       key={feature}
+                      className="glass-card"
                       style={{
                         display: "flex",
                         alignItems: "flex-start",
                         gap: 12,
                         padding: "14px 18px",
                         borderRadius: 12,
-                        background: "rgba(248,249,255,0.8)",
-                        border: "1px solid rgba(139,92,246,0.08)",
+                        background: "var(--glass-bg)",
+                        border: "1px solid var(--glass-border)",
                       }}
                     >
                       <CheckCircle
