@@ -21,11 +21,12 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
       <section
         style={{
           background: isDesign
-            ? "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 50%, #fdf2f8 100%)"
-            : "linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #f0f9ff 100%)",
+            ? "linear-gradient(135deg, var(--bg-secondary) 0%, rgba(139, 92, 246, 0.05) 50%, rgba(236, 72, 153, 0.05) 100%)"
+            : "linear-gradient(135deg, var(--bg-secondary) 0%, rgba(59, 130, 246, 0.05) 50%, rgba(8, 8, 18, 0.05) 100%)",
           padding: "64px 24px 56px",
           position: "relative",
           overflow: "hidden",
+          borderBottom: "1px solid var(--glass-border)",
         }}
       >
         <div
@@ -37,8 +38,9 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
             height: 300,
             borderRadius: "50%",
             background: isDesign
-              ? "radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)",
+              ? "radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%)",
+            pointerEvents: "none",
           }}
         />
         <div className="container-custom">
