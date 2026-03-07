@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Linkedin, Instagram, Github, Download, ArrowRight, Eye } from "lucide-react";
+import { Linkedin, Instagram, Github, ArrowRight, Eye } from "lucide-react";
 import AnimatedText from "./components/AnimatedText";
 import ScrollReveal from "./components/ScrollReveal";
 
@@ -149,15 +149,6 @@ export default function HomePage() {
                   Hire Me
                   <ArrowRight size={16} />
                 </Link>
-                <a
-                  href="/cv.pdf"
-                  download
-                  className="btn-secondary"
-                  style={{ borderColor: "rgba(59,130,246,0.4)", color: "var(--accent-blue)" }}
-                >
-                  <Download size={16} />
-                  Download CV
-                </a>
               </motion.div>
 
               {/* Social Icons */}
@@ -598,16 +589,12 @@ export default function HomePage() {
         <div className="container-custom">
           <ScrollReveal>
             <div
+              className="glass-panel"
               style={{
                 maxWidth: 700,
                 margin: "0 auto",
                 textAlign: "center",
                 padding: "60px 40px",
-                borderRadius: "var(--radius-xl)",
-                background: "rgba(255, 255, 255, 0.4)",
-                backdropFilter: "blur(20px)",
-                border: "1px solid rgba(139,92,246,0.15)",
-                boxShadow: "var(--shadow-lg)",
               }}
             >
               <p

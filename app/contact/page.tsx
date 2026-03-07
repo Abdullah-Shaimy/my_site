@@ -185,8 +185,8 @@ export default function ContactPage() {
                           width: 42,
                           height: 42,
                           borderRadius: 12,
-                          background: "rgba(255,255,255,0.8)",
-                          border: "1px solid rgba(139,92,246,0.15)",
+                          background: "var(--glass-bg)",
+                          border: "1px solid var(--glass-border)",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
@@ -201,9 +201,9 @@ export default function ContactPage() {
                           e.currentTarget.style.transform = "translateY(-2px)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.background = "rgba(255,255,255,0.8)";
+                          e.currentTarget.style.background = "var(--glass-bg)";
                           e.currentTarget.style.color = "var(--text-secondary)";
-                          e.currentTarget.style.borderColor = "rgba(139,92,246,0.15)";
+                          e.currentTarget.style.borderColor = "var(--glass-border)";
                           e.currentTarget.style.transform = "none";
                         }}
                       >

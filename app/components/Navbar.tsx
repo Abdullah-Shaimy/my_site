@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
@@ -29,10 +30,8 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) {
-      setTimeout(() => setMobileOpen(false), 0);
-    }
-  }, [pathname, mobileOpen]);
+    setMobileOpen(false);
+  }, [pathname]);
 
   return (
     <>
@@ -49,14 +48,14 @@ export default function Navbar() {
           padding: "0 24px",
           transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
           background: scrolled
-            ? "rgba(255, 255, 255, 0.65)"
+            ? "var(--glass-bg)"
             : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
           borderBottom: scrolled
-            ? "1px solid rgba(139, 92, 246, 0.1)"
+            ? "1px solid var(--glass-border)"
             : "1px solid transparent",
-          boxShadow: scrolled ? "0 4px 30px rgba(59, 130, 246, 0.08)" : "none",
+          boxShadow: scrolled ? "var(--shadow-sm)" : "none",
         }}
         className={scrolled ? "glass-nav" : ""}
       >
@@ -76,19 +75,28 @@ export default function Navbar() {
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <div
                   style={{
-                    width: 34,
-                    height: 34,
-                    borderRadius: 10,
-                    background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    boxShadow: "0 4px 12px rgba(59, 130, 246, 0.3)",
                   }}
                 >
-                  <Zap size={18} color="white" strokeWidth={2.5} />
+                  <Image
+                    src="/logo.png"
+                    alt="Logo"
+                    width={34}
+                    height={34}
+                    style={{
+                      objectFit: "contain",
+                      filter:
+                        theme === "dark"
+                          ? "drop-shadow(0 0 8px rgba(139, 92, 246, 0.8)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.8))"
+                          : "none",
+                      transition: "filter 0.3s ease",
+                    }}
+                  />
                 </div>
                 <span
+                  className="navbar-brand-name"
                   style={{
                     fontFamily: "var(--font-josefin), sans-serif",
                     fontWeight: 700,
@@ -113,9 +121,9 @@ export default function Navbar() {
               alignItems: "center",
               gap: 4,
               padding: "6px",
-              background: scrolled ? "rgba(255, 255, 255, 0.4)" : "transparent",
+              background: scrolled ? "var(--glass-bg)" : "transparent",
               borderRadius: "50px",
-              border: scrolled ? "1px solid rgba(139, 92, 246, 0.08)" : "1px solid transparent",
+              border: scrolled ? "1px solid var(--glass-border)" : "1px solid transparent",
               backdropFilter: scrolled ? "blur(10px)" : "none",
               transition: "all 0.3s ease",
             }}
@@ -148,7 +156,7 @@ export default function Navbar() {
                 width: 40,
                 height: 40,
                 borderRadius: "50%",
-                background: scrolled ? "rgba(255, 255, 255, 0.4)" : "rgba(255, 255, 255, 0.1)",
+                background: scrolled ? "var(--glass-bg)" : "var(--glass-bg)",
                 border: "1px solid var(--glass-border)",
                 display: "flex",
                 alignItems: "center",
@@ -194,8 +202,8 @@ export default function Navbar() {
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               style={{
-                background: scrolled ? "rgba(255, 255, 255, 0.4)" : "rgba(255, 255, 255, 0.1)",
-                border: "1px solid rgba(139, 92, 246, 0.1)",
+                background: scrolled ? "var(--glass-bg)" : "var(--glass-bg)",
+                border: "1px solid var(--glass-border)",
                 borderRadius: "12px",
                 cursor: "pointer",
                 color: "var(--text-primary)",
@@ -229,9 +237,9 @@ export default function Navbar() {
               left: 0,
               right: 0,
               zIndex: 999,
-              background: "rgba(255,255,255,0.97)",
+              background: "var(--glass-bg)",
               backdropFilter: "blur(20px)",
-              borderBottom: "1px solid rgba(139,92,246,0.1)",
+              borderBottom: "1px solid var(--glass-border)",
               padding: "16px 24px 24px",
               display: "flex",
               flexDirection: "column",
@@ -259,6 +267,9 @@ export default function Navbar() {
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .mobile-menu-btn { display: flex !important; }
+        }
+        @media (max-width: 480px) {
+          .navbar-brand-name { display: none !important; }
         }
         @media (min-width: 769px) {
           .mobile-menu-btn { display: none !important; }
