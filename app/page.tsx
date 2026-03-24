@@ -2,20 +2,44 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import Script from "next/script";
+import dynamic from "next/dynamic";
 import { ArrowRight, Eye } from "lucide-react";
 import AnimatedText from "./components/AnimatedText";
 import ScrollReveal from "./components/ScrollReveal";
-import LiquidStats from "./components/LiquidStats";
+const LiquidStats = dynamic(() => import("./components/LiquidStats"), {
+  ssr: false,
+});
 
 const socialLinks = [
   { href: "https://www.linkedin.com/in/abdullahshaimy/", icon: "/icons/linkedin.png", label: "LinkedIn" },
   { href: "https://www.behance.net/abdullahshaimy/", icon: "/icons/behance.png", label: "Behance" },
 ];
 
+const personLdJson = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Abdullah Shaimy",
+  url: "https://abdullahshaimy.dev",
+  jobTitle: "Full-stack Developer and Graphic Designer",
+  knowsAbout: ["Next.js", "React", "UI/UX Design", "Brand Identity", "Web Development"],
+  sameAs: [
+    "https://www.linkedin.com/in/abdullahshaimy/",
+    "https://www.behance.net/abdullahshaimy/",
+  ],
+};
+
 export default function HomePage() {
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg-primary)" }}>
-      {/* ─── Hero Section ─────────────────────────────────────── */}
+      <Script
+        id="person-ld-json"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personLdJson) }}
+      />
+
+      {/* Hero Section */}
       <section
         style={{
           minHeight: "100vh",
@@ -63,8 +87,8 @@ export default function HomePage() {
                 style={{ marginBottom: 24 }}
               >
                 <span className="section-badge">
-                  <span style={{ color: "#22c55e", fontSize: "0.7rem" }}>●</span>
-                  Available for Work · Sri Lanka 🇱🇰
+                  <span style={{ color: "#22c55e", fontSize: "0.7rem" }}>•</span>
+                  Available for Work · Sri Lanka
                 </span>
               </motion.div>
 
@@ -80,34 +104,14 @@ export default function HomePage() {
                     fontWeight: 800,
                     fontSize: "clamp(2.4rem, 5vw, 4rem)",
                     lineHeight: 1.1,
-                    color: "var(--text-primary)",
                     marginBottom: 4,
                   }}
                 >
-                  Hi, I&apos;m
-                </h1>
-                <h1
-                  style={{
-                    fontFamily: "var(--font-josefin), sans-serif",
-                    fontWeight: 800,
-                    fontSize: "clamp(2.4rem, 5vw, 4rem)",
-                    lineHeight: 1.1,
-                    color: "var(--text-primary)",
-                    marginBottom: 4,
-                  }}
-                >
-                  Abdullah Shaimy,
-                </h1>
-                <h1
-                  style={{
-                    fontFamily: "var(--font-josefin), sans-serif",
-                    fontWeight: 800,
-                    fontSize: "clamp(2.4rem, 5vw, 4rem)",
-                    lineHeight: 1.1,
-                    marginBottom: 4,
-                  }}
-                >
-                  <AnimatedText />
+                  <span style={{ color: "var(--text-primary)", display: "block" }}>Hi, I&apos;m</span>
+                  <span style={{ color: "var(--text-primary)", display: "block" }}>Abdullah Shaimy,</span>
+                  <span style={{ display: "block" }}>
+                    <AnimatedText />
+                  </span>
                 </h1>
               </motion.div>
 
@@ -192,18 +196,19 @@ export default function HomePage() {
                       e.currentTarget.style.boxShadow = "var(--shadow-sm)";
                     }}
                   >
-                    <img 
-                      src={Icon} 
-                      alt={label} 
+                    <Image
+                      src={Icon}
+                      alt={label}
+                      width={18}
+                      height={18}
                       className="social-icon-img"
-                      style={{ width: 18, height: 18 }}
                     />
                   </a>
                 ))}
               </motion.div>
             </div>
 
-            {/* Right — Avatar */}
+            {/* Right - Avatar */}
             <motion.div
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -307,14 +312,15 @@ export default function HomePage() {
                     zIndex: 1,
                   }}
                 >
-                  <img
+                  <Image
                     src="/profile.jpg"
                     alt="Professional Avatar"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 260px, 320px"
                     onContextMenu={(e) => e.preventDefault()}
                     onDragStart={(e) => e.preventDefault()}
                     style={{
-                      width: "100%",
-                      height: "100%",
                       borderRadius: "50%",
                       objectFit: "cover",
                       transform: "scale(1.1)",
@@ -380,12 +386,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── Stats Bar ─────────────────────────────────────────── */}
+      {/* Stats Bar */}
       <ScrollReveal>
         <LiquidStats />
       </ScrollReveal>
 
-      {/* ─── Featured Work Preview ─────────────────────────────── */}
+      {/* Featured Work Preview */}
       <section
         className="section-padding"
         style={{ background: "var(--bg-primary)" }}
@@ -430,21 +436,21 @@ export default function HomePage() {
             {[
               {
                 emoji: "💻",
-                title: "Nexus SaaS Web App",
-                cat: "Development",
-                slug: "nexus-web-app",
+                title: "Grapzy International Branding",
+                cat: "Designing",
+                slug: "grapzy-branding",
               },
               {
                 emoji: "🤖",
-                title: "Aria AI Chat Interface",
-                cat: "Development",
-                slug: "ai-chat-interface",
+                title: "Eco-Luxury Hotel Website UI",
+                cat: "Designing",
+                slug: "hotel-website-ui",
               },
               {
                 emoji: "🎨",
-                title: "Nova UI Design System",
+                title: "Corporate Profile Brochure",
                 cat: "Designing",
-                slug: "nova-ui-kit",
+                slug: "company-brochure",
               },
             ].map((item, i) => (
               <ScrollReveal key={item.slug} delay={i * 0.15}>
@@ -507,7 +513,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── Services Teaser ───────────────────────────────────── */}
+      {/* Services Teaser */}
       <section
         style={{
           background: "transparent",
@@ -546,7 +552,7 @@ export default function HomePage() {
                     fontSize: "1rem",
                   }}
                 >
-                  From high-performance web apps to minimalist corporate branding—I deliver digital solutions through <strong>NanoVext</strong> that prioritize speed, aesthetics, and professional results.
+                  From high-performance web apps to minimalist corporate branding-I deliver digital solutions through <strong>NanoVext</strong> that prioritize speed, aesthetics, and professional results.
                 </p>
                 <Link href="/services" className="btn-primary">
                   Explore Services
@@ -617,7 +623,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── CTA Section ──────────────────────────────────────── */}
+      {/* CTA Section */}
       <section className="section-padding">
         <div className="container-custom">
           <ScrollReveal>

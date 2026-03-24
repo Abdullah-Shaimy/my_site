@@ -1,19 +1,38 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const roles = ["Learner", "Developer", "Designer", "Freelancer"];
 
 export default function AnimatedText() {
   const [index, setIndex] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
+    if (shouldReduceMotion) return;
+
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % roles.length);
     }, 2500);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [shouldReduceMotion]);
+
+  if (shouldReduceMotion) {
+    return (
+      <span
+        className="gradient-text"
+        style={{
+          fontFamily: "var(--font-josefin), sans-serif",
+          fontWeight: 800,
+          display: "inline-block",
+        }}
+      >
+        Developer
+      </span>
+    );
+  }
 
   return (
     <div

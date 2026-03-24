@@ -4,7 +4,21 @@ import { use } from "react";
 import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Clock, CheckCircle, Package, Layers, Palette, Grid3X3, Code2, Monitor, Cpu } from "lucide-react";
+import Image from "next/image";
+import {
+  ArrowLeft,
+  Clock,
+  CheckCircle,
+  Package,
+  Layers,
+  Palette,
+  Grid3X3,
+  Code2,
+  Monitor,
+  Cpu,
+  Terminal,
+  Briefcase,
+} from "lucide-react";
 import { services } from "../../data/services";
 import ScrollReveal from "../../components/ScrollReveal";
 
@@ -15,6 +29,8 @@ const iconMap: Record<string, React.ElementType> = {
   Code2,
   Monitor,
   Cpu,
+  Terminal,
+  Briefcase,
 };
 
 export default function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -132,20 +148,21 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
                     aspectRatio: "21/9",
                     borderRadius: "var(--radius-lg)",
                     overflow: "hidden",
+                    position: "relative",
                     marginBottom: 40,
                     border: "1px solid rgba(139,92,246,0.1)",
                   }}
                 >
-                  <img
+                  <Image
                     src={
                       isDesign
                         ? "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1200"
                         : "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1200"
                     }
                     alt={service.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 900px"
                     style={{
-                      width: "100%",
-                      height: "100%",
                       objectFit: "cover",
                     }}
                   />

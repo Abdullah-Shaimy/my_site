@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext } from "react";
 
 type Theme = "dark";
 
@@ -12,23 +12,12 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    // Always dark — clear any saved preference
-    localStorage.removeItem("theme");
-    document.documentElement.setAttribute("data-theme", "dark");
-    setMounted(true);
-  }, []);
-
-  // toggleTheme is a no-op; kept so consumers don't break
+  // toggleTheme is intentionally a no-op while the site stays dark-only.
   const toggleTheme = () => {};
 
   return (
     <ThemeContext.Provider value={{ theme: "dark", toggleTheme }}>
-      <div style={{ visibility: mounted ? "visible" : "hidden" }}>
-        {children}
-      </div>
+      {children}
     </ThemeContext.Provider>
   );
 }

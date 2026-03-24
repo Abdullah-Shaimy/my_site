@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Heart, Zap } from "lucide-react";
 
 const footerLinks = [
@@ -182,11 +183,12 @@ export default function Footer() {
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 >
-                  <img 
-                    src={Icon} 
-                    alt={label} 
+                  <Image
+                    src={Icon}
+                    alt={label}
+                    width={18}
+                    height={18}
                     className="social-icon-img"
-                    style={{ width: 18, height: 18 }}
                   />
                 </a>
               ))}

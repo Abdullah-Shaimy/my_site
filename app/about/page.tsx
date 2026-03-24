@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Calendar, Download, CheckCircle, ArrowRight } from "lucide-react";
 import ScrollReveal from "../components/ScrollReveal";
 import SkillBar from "../components/SkillBar";
@@ -60,21 +61,23 @@ export default function AboutPage() {
                   overflow: "hidden",
                 }}
               >
-                  <img
-                    src="/profile.jpg"
-                    alt="Professional Avatar"
-                    onContextMenu={(e) => e.preventDefault()}
-                    onDragStart={(e) => e.preventDefault()}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: "50%",
-                      objectFit: "cover",
-                      transform: "scale(1.2)",
-                      objectPosition: "center 0%",
-                      userSelect: "none",
-                    }}
-                  />
+                <Image
+                  src="/profile.jpg"
+                  alt="Professional Avatar"
+                  width={172}
+                  height={172}
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    transform: "scale(1.2)",
+                    objectPosition: "center 0%",
+                    userSelect: "none",
+                  }}
+                />
               </div>
             </motion.div>
 
@@ -134,9 +137,9 @@ export default function AboutPage() {
                 I am a <strong>Full-stack Developer and Graphic Designer</strong> with 2+ years of experience. From completing the <strong>Hifz of Al-Quran</strong> to studying at the <strong>University of Moratuwa</strong>, my work is driven by discipline and technical precision. Through my brand, <strong>NanoVext</strong>, I build high-performance <strong>Next.js applications</strong> and minimalist corporate designs that help businesses stand out.
               </p>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <a href="/cv.pdf" download className="btn-primary">
-                  <Download size={16} /> Download CV
-                </a>
+                <Link href="/resume" className="btn-primary">
+                  <Download size={16} /> View Resume
+                </Link>
                 <Link href="/contact" className="btn-secondary">
                   Hire Me <ArrowRight size={16} />
                 </Link>
@@ -174,9 +177,9 @@ export default function AboutPage() {
                 </h2>
                 <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                   {[
-                    "My journey began with a focus on discipline and precision—qualities I honed while completing the Hifz of Al-Quran. Today, I channel that same dedication into <strong>NanoVext</strong>, where I bridge the gap between technical engineering and corporate aesthetics.",
-                    "Based in Sri Lanka and working with clients globally, I am currently expanding my technical expertise through the <strong>University of Moratuwa</strong>. My goal is to build high-performance web applications that don't just work perfectly but look exceptional.",
-                    "Whether it’s a full-stack Next.js platform or a minimalist corporate identity, I approach every project with strategic thinking and a commitment to professional, clean results.",
+                    "My journey began with a focus on discipline and precision, qualities I honed while completing the Hifz of Al-Quran. Today, I channel that same dedication into NanoVext, where I bridge the gap between technical engineering and corporate aesthetics.",
+                    "Based in Sri Lanka and working with clients globally, I am currently expanding my technical expertise through the University of Moratuwa. My goal is to build high-performance web applications that don't just work perfectly but look exceptional.",
+                    "Whether it is a full-stack Next.js platform or a minimalist corporate identity, I approach every project with strategic thinking and a commitment to professional, clean results.",
                   ].map((para, i) => (
                     <p
                       key={i}
@@ -185,8 +188,9 @@ export default function AboutPage() {
                         lineHeight: 1.75,
                         fontSize: "0.95rem",
                       }}
-                      dangerouslySetInnerHTML={{ __html: para }}
-                    />
+                    >
+                      {para}
+                    </p>
                   ))}
                 </div>
               </ScrollReveal>

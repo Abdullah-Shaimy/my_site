@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Briefcase, GraduationCap, Download, MapPin, Calendar, Star } from "lucide-react";
 import ScrollReveal from "../components/ScrollReveal";
 import { experiences, education } from "../data/resume";
@@ -49,9 +50,9 @@ export default function ResumePage() {
           <p style={{ color: "var(--text-secondary)", fontSize: "1rem", maxWidth: 500, margin: "0 auto 24px" }}>
             My experiences, education, and the path that shaped who I am today.
           </p>
-          <a href="/cv.pdf" download className="btn-primary">
-            <Download size={16} /> Download Full CV
-          </a>
+          <Link href="/contact" className="btn-primary">
+            <Download size={16} /> Request Full CV
+          </Link>
         </motion.div>
       </section>
 

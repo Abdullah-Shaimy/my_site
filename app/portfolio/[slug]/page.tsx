@@ -4,6 +4,7 @@ import { use } from "react";
 import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ExternalLink, Github, Tag, Calendar, User } from "lucide-react";
 import { projects } from "../../data/projects";
 import ScrollReveal from "../../components/ScrollReveal";
@@ -146,17 +147,18 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                     aspectRatio: "16/9",
                     borderRadius: "var(--radius-lg)",
                     overflow: "hidden",
+                    position: "relative",
                     marginBottom: 40,
                     border: "1px solid rgba(139,92,246,0.1)",
                     boxShadow: "0 20px 40px rgba(0,0,0,0.05)",
                   }}
                 >
-                  <img
+                  <Image
                     src={project.image}
                     alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 900px"
                     style={{
-                      width: "100%",
-                      height: "100%",
                       objectFit: "cover",
                     }}
                   />

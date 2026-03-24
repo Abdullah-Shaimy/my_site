@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Mail, MapPin, Clock, Send, CheckCircle, AlertCircle } from "lucide-react";
 import ScrollReveal from "../components/ScrollReveal";
 import { supabase } from "../lib/supabase";
@@ -224,11 +225,12 @@ export default function ContactPage() {
                           e.currentTarget.style.transform = "none";
                         }}
                       >
-                        <img 
-                          src={Icon} 
-                          alt={label} 
+                        <Image
+                          src={Icon}
+                          alt={label}
+                          width={18}
+                          height={18}
                           className="social-icon-img"
-                          style={{ width: 18, height: 18 }}
                         />
                       </a>
                     ))}
@@ -362,7 +364,7 @@ export default function ContactPage() {
                       >
                         {/* Name */}
                         <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: 6 }}>
+                          <label htmlFor="contact-name" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: 6 }}>
                             Your Name *
                           </label>
                           <input
@@ -384,7 +386,7 @@ export default function ContactPage() {
 
                         {/* Email */}
                         <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: 6 }}>
+                          <label htmlFor="contact-email" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: 6 }}>
                             Email Address *
                           </label>
                           <input
@@ -407,7 +409,7 @@ export default function ContactPage() {
 
                       {/* Subject */}
                       <div style={{ marginBottom: 16 }}>
-                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: 6 }}>
+                        <label htmlFor="contact-subject" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: 6 }}>
                           Subject *
                         </label>
                         <input
@@ -429,7 +431,7 @@ export default function ContactPage() {
 
                       {/* Message */}
                       <div style={{ marginBottom: 24 }}>
-                        <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: 6 }}>
+                        <label htmlFor="contact-message" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text-secondary)", marginBottom: 6 }}>
                           Message *
                         </label>
                         <textarea

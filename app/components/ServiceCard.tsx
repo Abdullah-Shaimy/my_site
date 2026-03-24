@@ -2,7 +2,17 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Layers, Palette, Grid3X3, Code2, Monitor, Cpu } from "lucide-react";
+import {
+  ArrowUpRight,
+  Layers,
+  Palette,
+  Grid3X3,
+  Code2,
+  Monitor,
+  Cpu,
+  Terminal,
+  Briefcase,
+} from "lucide-react";
 import { Service } from "../data/services";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -12,6 +22,8 @@ const iconMap: Record<string, React.ElementType> = {
   Code2,
   Monitor,
   Cpu,
+  Terminal,
+  Briefcase,
 };
 
 interface ServiceCardProps {

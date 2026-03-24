@@ -10,8 +10,14 @@ type Category = "All" | "Designing" | "Development";
 
 const categories: Category[] = ["All", "Development", "Designing"];
 
+const availableCategories: Category[] = categories.filter(
+  (category) =>
+    category === "All" ||
+    projects.some((project) => project.category === category)
+);
+
 export default function PortfolioPage() {
-  const [active, setActive] = useState<Category>("Development");
+  const [active, setActive] = useState<Category>("All");
 
   const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
 
@@ -65,7 +71,7 @@ export default function PortfolioPage() {
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <ScrollReveal>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              {categories.map((cat) => (
+              {availableCategories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActive(cat)}

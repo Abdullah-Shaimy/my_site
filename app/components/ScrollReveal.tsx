@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, ReactNode } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import { motion, useInView, useAnimation, useReducedMotion } from "framer-motion";
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -17,7 +17,8 @@ export default function ScrollReveal({
   className,
 }: ScrollRevealProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "0px" });
+  const shouldReduceMotion = useReducedMotion();
+  const isInView = useInView(ref, { once: true, margin: "-60px 0px" });
   const controls = useAnimation();
 
   const variants = {
@@ -38,6 +39,14 @@ export default function ScrollReveal({
       controls.start("visible");
     }
   }, [isInView, controls]);
+
+  if (shouldReduceMotion) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <motion.div
