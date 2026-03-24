@@ -50,6 +50,7 @@ export default function CircuitLines() {
 
     const ctx = canvasEl.getContext("2d");
     if (!ctx) return;
+    const context: CanvasRenderingContext2D = ctx;
 
     let raf = 0;
     let frame = 0;
@@ -135,7 +136,7 @@ export default function CircuitLines() {
         return;
       }
 
-      ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+      context.clearRect(0, 0, canvasEl.width, canvasEl.height);
       frame += 1;
 
       const density = getDensity();
@@ -169,50 +170,50 @@ export default function CircuitLines() {
         const ex = s.x + s.dx * cl;
         const ey = s.y + s.dy * cl;
 
-        ctx.beginPath();
-        ctx.moveTo(s.x, s.y);
-        ctx.lineTo(ex, ey);
-        ctx.strokeStyle = rgba(s.color, s.alpha * trailA);
-        ctx.lineWidth = s.width;
-        ctx.lineCap = "round";
-        ctx.stroke();
+        context.beginPath();
+        context.moveTo(s.x, s.y);
+        context.lineTo(ex, ey);
+        context.strokeStyle = rgba(s.color, s.alpha * trailA);
+        context.lineWidth = s.width;
+        context.lineCap = "round";
+        context.stroke();
 
         const tailLen = Math.min(GRID * 5, cl);
         if (tailLen > 1) {
           const t0x = ex - s.dx * tailLen;
           const t0y = ey - s.dy * tailLen;
 
-          const gradient = ctx.createLinearGradient(t0x, t0y, ex, ey);
+          const gradient = context.createLinearGradient(t0x, t0y, ex, ey);
           gradient.addColorStop(0, rgba(s.color, 0));
           gradient.addColorStop(0.5, rgba(s.color, s.alpha * peakA * 0.3));
           gradient.addColorStop(0.85, rgba(s.color, s.alpha * peakA * 0.8));
           gradient.addColorStop(1, rgba(s.color, s.alpha * peakA));
 
-          ctx.beginPath();
-          ctx.moveTo(t0x, t0y);
-          ctx.lineTo(ex, ey);
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = s.width + 5;
-          ctx.globalAlpha = 0.35;
-          ctx.stroke();
-          ctx.globalAlpha = 1;
+          context.beginPath();
+          context.moveTo(t0x, t0y);
+          context.lineTo(ex, ey);
+          context.strokeStyle = gradient;
+          context.lineWidth = s.width + 5;
+          context.globalAlpha = 0.35;
+          context.stroke();
+          context.globalAlpha = 1;
 
-          ctx.beginPath();
-          ctx.moveTo(t0x, t0y);
-          ctx.lineTo(ex, ey);
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = s.width;
-          ctx.stroke();
+          context.beginPath();
+          context.moveTo(t0x, t0y);
+          context.lineTo(ex, ey);
+          context.strokeStyle = gradient;
+          context.lineWidth = s.width;
+          context.stroke();
 
           const dotR = s.width + 5;
-          const tipGradient = ctx.createRadialGradient(ex, ey, 0, ex, ey, dotR);
+          const tipGradient = context.createRadialGradient(ex, ey, 0, ex, ey, dotR);
           tipGradient.addColorStop(0, rgba(s.color, s.alpha * peakA));
           tipGradient.addColorStop(0.5, rgba(s.color, s.alpha * peakA * 0.5));
           tipGradient.addColorStop(1, rgba(s.color, 0));
-          ctx.beginPath();
-          ctx.arc(ex, ey, dotR, 0, Math.PI * 2);
-          ctx.fillStyle = tipGradient;
-          ctx.fill();
+          context.beginPath();
+          context.arc(ex, ey, dotR, 0, Math.PI * 2);
+          context.fillStyle = tipGradient;
+          context.fill();
         }
 
         if (s.traveled > 0 && s.traveled % GRID < s.speed + 1 && !s.fadeOut) {
@@ -246,14 +247,14 @@ export default function CircuitLines() {
         }
 
         const pA = (Math.sin(n.pulse) * 0.5 + 0.5) * n.alpha * nodeA;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r + 4, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(n.color, pA * 0.2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(n.color, pA);
-        ctx.fill();
+        context.beginPath();
+        context.arc(n.x, n.y, n.r + 4, 0, Math.PI * 2);
+        context.fillStyle = rgba(n.color, pA * 0.2);
+        context.fill();
+        context.beginPath();
+        context.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        context.fillStyle = rgba(n.color, pA);
+        context.fill();
       }
 
       raf = requestAnimationFrame(draw);
