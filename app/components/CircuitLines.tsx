@@ -43,11 +43,12 @@ export default function CircuitLines() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const canvasEl = canvas;
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvasEl.getContext("2d");
     if (!ctx) return;
 
     let raf = 0;
@@ -66,8 +67,8 @@ export default function CircuitLines() {
     }
 
     function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvasEl.width = window.innerWidth;
+      canvasEl.height = window.innerHeight;
     }
 
     function isDark() {
@@ -84,8 +85,8 @@ export default function CircuitLines() {
       const palette = colors();
       const color = palette[Math.floor(Math.random() * palette.length)];
       const side = Math.floor(Math.random() * 4);
-      const gW = Math.floor(canvas.width / GRID);
-      const gH = Math.floor(canvas.height / GRID);
+      const gW = Math.floor(canvasEl.width / GRID);
+      const gH = Math.floor(canvasEl.height / GRID);
       const gx = Math.floor(Math.random() * gW) * GRID;
       const gy = Math.floor(Math.random() * gH) * GRID;
 
@@ -99,7 +100,7 @@ export default function CircuitLines() {
         y = gy;
         dx = 1;
       } else if (side === 1) {
-        x = canvas.width;
+        x = canvasEl.width;
         y = gy;
         dx = -1;
       } else if (side === 2) {
@@ -108,7 +109,7 @@ export default function CircuitLines() {
         dy = 1;
       } else {
         x = gx;
-        y = canvas.height;
+        y = canvasEl.height;
         dy = -1;
       }
 
@@ -134,7 +135,7 @@ export default function CircuitLines() {
         return;
       }
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
       frame += 1;
 
       const density = getDensity();
