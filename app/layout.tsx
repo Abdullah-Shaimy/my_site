@@ -96,13 +96,9 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <CircuitLines />
-          <div className="layout-shell">
-            <Navbar />
-            <div className="layout-content">
-              <main>{children}</main>
-              <Footer />
-            </div>
-          </div>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
