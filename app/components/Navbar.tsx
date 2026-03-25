@@ -14,7 +14,6 @@ const navLinks = [
   { href: "/resume", label: "Resume" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/services", label: "Services" },
-  { href: "/dynqr", label: "DynQR" },
   { href: "/contact", label: "Contact" },
 ];
 
