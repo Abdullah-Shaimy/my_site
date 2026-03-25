@@ -1,9 +1,9 @@
-import { listCodes } from "@/lib/db/mock-db";
+import { listCodesDb } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
-export default function AnalyticsPage() {
-  const codes = listCodes();
+export default async function AnalyticsPage() {
+  const codes = await listCodesDb();
   const sorted = [...codes].sort((a, b) => b.scans - a.scans).slice(0, 8);
   const maxScans = sorted[0]?.scans ?? 1;
 

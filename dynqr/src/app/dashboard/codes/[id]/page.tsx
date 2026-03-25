@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import EditCodeForm from "@/components/dashboard/EditCodeForm";
-import { getCodeById } from "@/lib/db/mock-db";
+import { getCodeByIdDb } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +10,7 @@ interface EditCodePageProps {
 
 export default async function EditCodePage({ params }: EditCodePageProps) {
   const { id } = await params;
-  const code = getCodeById(id);
+  const code = await getCodeByIdDb(id);
 
   if (!code) {
     notFound();

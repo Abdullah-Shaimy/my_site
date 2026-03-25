@@ -1,12 +1,12 @@
 import Link from "next/link";
 import QRCodeTable from "@/components/dashboard/QRCodeTable";
 import StatsCard from "@/components/dashboard/StatsCard";
-import { listCodes } from "@/lib/db/mock-db";
+import { listCodesDb } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
-export default function DashboardPage() {
-  const codes = listCodes();
+export default async function DashboardPage() {
+  const codes = await listCodesDb();
   const totalScans = codes.reduce((sum, code) => sum + code.scans, 0);
   const activeCodes = codes.filter((code) => code.active).length;
   const recentlyScanned = codes.filter((code) => Boolean(code.lastScannedAt)).length;

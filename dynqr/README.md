@@ -11,13 +11,18 @@ DynQR is a separate free service app for dynamic QR code management.
 - PNG and SVG QR download API
 - Share link copy
 - Auth pages (demo UI flow)
+- Supabase DB support with mock fallback
 
 ## Run locally
 
 1. `cd dynqr`
 2. `npm install`
-3. `npm run dev`
-4. Open `http://localhost:3000`
+3. Create `.env.local` with:
+   - `NEXT_PUBLIC_SUPABASE_URL=...`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY=...`
+4. Run SQL from `supabase/schema.sql` in Supabase SQL Editor
+5. `npm run dev`
+6. Open `http://localhost:3000`
 
 ## Build
 
@@ -26,5 +31,4 @@ DynQR is a separate free service app for dynamic QR code management.
 ## Notes
 
 - This app is intentionally separate from your portfolio app.
-- Current storage uses in-memory mock DB (`src/lib/db/mock-db.ts`).
-- For production persistence and real auth, connect Supabase and migrate DB/auth handlers.
+- If Supabase config/table is missing, app automatically falls back to in-memory mock DB.

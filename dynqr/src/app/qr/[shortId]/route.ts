@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getCodeByShortId, incrementScan } from "@/lib/db/mock-db";
+import { getCodeByShortIdDb, incrementScanDb } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
@@ -9,7 +9,7 @@ interface RouteContext {
 
 export async function GET(request: Request, context: RouteContext) {
   const { shortId } = await context.params;
-  const code = getCodeByShortId(shortId);
+  const code = await getCodeByShortIdDb(shortId);
 
   if (!code) {
     return NextResponse.redirect(new URL("/?qr=not-found", request.url));
@@ -21,7 +21,7 @@ export async function GET(request: Request, context: RouteContext) {
 
   try {
     const targetUrl = new URL(code.destinationUrl);
-    incrementScan(shortId);
+    await incrementScanDb(shortId);
     return NextResponse.redirect(targetUrl.toString(), 307);
   } catch {
     return NextResponse.redirect(new URL("/?qr=invalid-url", request.url));

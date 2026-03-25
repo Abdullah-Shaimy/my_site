@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createCode, listCodes } from "@/lib/db/mock-db";
+import { createCodeDb, listCodesDb } from "@/lib/db";
 import { validateUrl } from "@/lib/utils/validate-url";
 
 export const dynamic = "force-dynamic";
@@ -10,7 +10,8 @@ type CreatePayload = {
 };
 
 export async function GET() {
-  return NextResponse.json({ data: listCodes() });
+  const codes = await listCodesDb();
+  return NextResponse.json({ data: codes });
 }
 
 export async function POST(request: Request) {
@@ -33,7 +34,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please provide a valid http/https URL." }, { status: 400 });
   }
 
-  const created = createCode({
+  const created = await createCodeDb({
     name,
     destinationUrl,
   });

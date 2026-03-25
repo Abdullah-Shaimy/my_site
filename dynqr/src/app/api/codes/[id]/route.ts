@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { deleteCode, getCodeById, updateCode } from "@/lib/db/mock-db";
+import { deleteCodeDb, getCodeByIdDb, updateCodeDb } from "@/lib/db";
 import type { UpdateQRCodeInput } from "@/lib/types";
 import { validateUrl } from "@/lib/utils/validate-url";
 
@@ -17,7 +17,7 @@ interface RouteContext {
 
 export async function GET(_request: Request, context: RouteContext) {
   const { id } = await context.params;
-  const code = getCodeById(id);
+  const code = await getCodeByIdDb(id);
 
   if (!code) {
     return NextResponse.json({ error: "QR code not found." }, { status: 404 });
@@ -62,7 +62,7 @@ export async function PUT(request: Request, context: RouteContext) {
     return NextResponse.json({ error: "No valid fields provided for update." }, { status: 400 });
   }
 
-  const updated = updateCode(id, updates);
+  const updated = await updateCodeDb(id, updates);
 
   if (!updated) {
     return NextResponse.json({ error: "QR code not found." }, { status: 404 });
@@ -73,7 +73,7 @@ export async function PUT(request: Request, context: RouteContext) {
 
 export async function DELETE(_request: Request, context: RouteContext) {
   const { id } = await context.params;
-  const ok = deleteCode(id);
+  const ok = await deleteCodeDb(id);
 
   if (!ok) {
     return NextResponse.json({ error: "QR code not found." }, { status: 404 });
