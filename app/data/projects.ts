@@ -16,6 +16,20 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "7",
+    slug: "dynqr-microsaas",
+    title: "DynQR Platform",
+    category: "Development",
+    shortDesc: "Dynamic QR code management platform with real-time analytics.",
+    description:
+      "Architected and developed a full-stack MicroSaaS application for creating, managing, and tracking dynamic QR codes. Features include a comprehensive analytics dashboard, custom redirects, and a modern responsive user interface built with Next.js.",
+    tags: ["Next.js", "React", "Supabase", "SaaS"],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+    liveUrl: "https://dynqr.abdullahshaimy.lk",
+    featured: true,
+    year: "2026",
+  },
+  {
     id: "1",
     slug: "grapzy-branding",
     title: "Grapzy International Branding",
