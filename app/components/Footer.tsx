@@ -225,26 +225,48 @@ export default function Footer() {
             justifyContent: "space-between",
             alignItems: "center",
             flexWrap: "wrap",
-            gap: 12,
+            gap: 16,
           }}
         >
-          <p
-            style={{
-              fontSize: "0.85rem",
-              color: "var(--text-muted)",
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-            }}
-          >
-            © 2025 Abdullah Shaimy. Made with{" "}
-            <Heart
-              size={14}
-              style={{ color: "#8b5cf6", fill: "#8b5cf6" }}
-            />{" "}
-            from Sri Lanka
-          </p>
-          <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <p
+              style={{
+                fontSize: "0.85rem",
+                color: "var(--text-muted)",
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                margin: 0,
+              }}
+            >
+              © {new Date().getFullYear()} Abdullah Shaimy. Made with{" "}
+              <Heart
+                size={14}
+                style={{ color: "#8b5cf6", fill: "#8b5cf6" }}
+              />{" "}
+              from Sri Lanka
+            </p>
+            <div style={{ display: "flex", gap: 16, fontSize: "0.8rem", color: "var(--text-muted)" }}>
+              <Link 
+                href="/privacy-policy" 
+                style={{ color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}
+                onMouseEnter={(e) => e.currentTarget.style.color = "var(--text-primary)"}
+                onMouseLeave={(e) => e.currentTarget.style.color = "var(--text-muted)"}
+              >
+                Privacy Policy
+              </Link>
+              <span>•</span>
+              <Link 
+                href="/refund-policy" 
+                style={{ color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}
+                onMouseEnter={(e) => e.currentTarget.style.color = "var(--text-primary)"}
+                onMouseLeave={(e) => e.currentTarget.style.color = "var(--text-muted)"}
+              >
+                Refund Policy
+              </Link>
+            </div>
+          </div>
+          <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: 0 }}>
             Designed & Developed by{" "}
             <span
               style={{
