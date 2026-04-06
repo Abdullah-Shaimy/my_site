@@ -61,7 +61,7 @@ export default function HomePage() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "linear-gradient(rgba(139,92,246,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.03) 1px, transparent 1px)",
+              "linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px)",
             backgroundSize: "80px 80px",
             pointerEvents: "none",
           }}
@@ -186,7 +186,7 @@ export default function HomePage() {
                       e.currentTarget.style.color = "white";
                       e.currentTarget.style.borderColor = "transparent";
                       e.currentTarget.style.transform = "translateY(-4px)";
-                      e.currentTarget.style.boxShadow = "0 8px 20px rgba(139, 92, 246, 0.25)";
+                      e.currentTarget.style.boxShadow = "0 8px 20px rgba(0, 210, 255, 0.25)";
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.background = "var(--glass-bg)";
@@ -231,9 +231,9 @@ export default function HomePage() {
                   <svg width="100%" height="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                       <linearGradient id="circuitGrad" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#3b82f6" />
+                        <stop offset="0%" stopColor="#00d2ff" />
                         <stop offset="50%" stopColor="#8b5cf6" />
-                        <stop offset="100%" stopColor="#ec4899" />
+                        <stop offset="100%" stopColor="#8b5cf6" />
                       </linearGradient>
                     </defs>
                     <g stroke="url(#circuitGrad)" strokeWidth="2" fill="none">
@@ -243,23 +243,23 @@ export default function HomePage() {
                       
                       {/* Connecting traces */}
                       <path d="M 250 20 L 250 50 L 270 70" />
-                      <circle cx="250" cy="20" r="4" fill="#3b82f6" />
+                      <circle cx="250" cy="20" r="4" fill="#00d2ff" />
                       <path d="M 480 250 L 450 250 L 430 230" />
-                      <circle cx="480" cy="250" r="4" fill="#ec4899" />
+                      <circle cx="480" cy="250" r="4" fill="#8b5cf6" />
                       <path d="M 250 480 L 250 450 L 230 430" />
-                      <circle cx="250" cy="480" r="4" fill="#3b82f6" />
+                      <circle cx="250" cy="480" r="4" fill="#00d2ff" />
                       <path d="M 20 250 L 50 250 L 70 270" />
                       <circle cx="20" cy="250" r="4" fill="#8b5cf6" />
                       
                       {/* Diagonals */}
                       <path d="M 87 87 L 115 115 L 140 115" />
-                      <circle cx="87" cy="87" r="4" fill="#ec4899" />
+                      <circle cx="87" cy="87" r="4" fill="#8b5cf6" />
                       <path d="M 413 87 L 385 115 L 360 115" />
-                      <circle cx="413" cy="87" r="4" fill="#3b82f6" />
+                      <circle cx="413" cy="87" r="4" fill="#00d2ff" />
                       <path d="M 87 413 L 115 385 L 140 385" />
                       <circle cx="87" cy="413" r="4" fill="#8b5cf6" />
                       <path d="M 413 413 L 385 385 L 360 385" />
-                      <circle cx="413" cy="413" r="4" fill="#ec4899" />
+                      <circle cx="413" cy="413" r="4" fill="#8b5cf6" />
 
                       {/* Nodes */}
                       <circle cx="270" cy="70" r="2" fill="none" />
@@ -281,7 +281,7 @@ export default function HomePage() {
                     inset: -20,
                     borderRadius: "50%",
                     background:
-                      "radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%)",
+                      "radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, transparent 70%)",
                     animation: "glowPulse 3s ease-in-out infinite",
                   }}
                 />
@@ -293,7 +293,7 @@ export default function HomePage() {
                     position: "absolute",
                     inset: -5,
                     borderRadius: "50%",
-                    background: "conic-gradient(from 0deg, transparent 70%, #3b82f6, #8b5cf6, #ec4899)",
+                    background: "conic-gradient(from 0deg, transparent 70%, #00d2ff, #8b5cf6, #8b5cf6)",
                     zIndex: 0,
                   }}
                 />
@@ -306,7 +306,7 @@ export default function HomePage() {
                     borderRadius: "50%",
                     background: "var(--bg-primary)",
                     padding: 4,
-                    boxShadow: "0 20px 60px rgba(139,92,246,0.25)",
+                    boxShadow: "0 20px 60px rgba(0, 210, 255, 0.25)",
                     overflow: "hidden",
                     position: "relative",
                     zIndex: 1,
@@ -478,7 +478,7 @@ export default function HomePage() {
                         fontSize: "0.75rem",
                         fontWeight: 600,
                         color:
-                          item.cat === "Designing" ? "#8b5cf6" : "#3b82f6",
+                          item.cat === "Designing" ? "var(--accent-purple)" : "var(--accent-blue)",
                         textTransform: "uppercase",
                         letterSpacing: "0.05em",
                       }}

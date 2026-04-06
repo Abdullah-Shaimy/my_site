@@ -94,7 +94,7 @@ export default function Navbar() {
                     fontFamily: "var(--font-josefin), sans-serif",
                     fontWeight: 700,
                     fontSize: "1.05rem",
-                    background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+                    background: "linear-gradient(135deg, #00d2ff, #8b5cf6)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",

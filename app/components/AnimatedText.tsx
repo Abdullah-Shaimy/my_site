@@ -24,7 +24,7 @@ export default function AnimatedText() {
       <span
         className="gradient-text"
         style={{
-          fontFamily: "var(--font-josefin), sans-serif",
+          fontFamily: "var(--font-inter), sans-serif",
           fontWeight: 800,
           display: "inline-block",
         }}
@@ -52,7 +52,7 @@ export default function AnimatedText() {
           transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
           className="gradient-text"
           style={{
-            fontFamily: "var(--font-josefin), sans-serif",
+            fontFamily: "var(--font-inter), sans-serif",
             fontWeight: 800,
             display: "inline-block",
           }}

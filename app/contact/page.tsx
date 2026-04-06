@@ -89,14 +89,14 @@ export default function ContactPage() {
             width: 280,
             height: 280,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(236,72,153,0.08) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(139, 92, 246,0.08) 0%, transparent 70%)",
           }}
         />
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <span className="section-badge">✦ Contact</span>
           <h1
             style={{
-              fontFamily: "var(--font-josefin), sans-serif",
+              fontFamily: "var(--font-inter), sans-serif",
               fontWeight: 800,
               fontSize: "clamp(2rem, 5vw, 3rem)",
               color: "var(--text-primary)",
@@ -123,7 +123,7 @@ export default function ContactPage() {
               <ScrollReveal>
                 <h2
                   style={{
-                    fontFamily: "var(--font-josefin), sans-serif",
+                    fontFamily: "var(--font-inter), sans-serif",
                     fontWeight: 700,
                     fontSize: "1.4rem",
                     color: "var(--text-primary)",
@@ -135,9 +135,9 @@ export default function ContactPage() {
               </ScrollReveal>
 
               {[
-                { icon: Mail, label: "Email", value: "abdullahshaimyofficial@gmail.com", color: "#3b82f6" },
+                { icon: Mail, label: "Email", value: "dev@abdullahshaimy.lk", color: "#8b5cf6" },
                 { icon: MapPin, label: "Location", value: "Sri Lanka 🇱🇰 • Available Worldwide", color: "#8b5cf6" },
-                { icon: Clock, label: "Response Time", value: "Within 24 hours", color: "#ec4899" },
+                { icon: Clock, label: "Response Time", value: "Within 24 hours", color: "#8b5cf6" },
               ].map(({ icon: Icon, label, value, color }, i) => (
                 <ScrollReveal key={label} delay={i * 0.1}>
                   <div
@@ -177,7 +177,7 @@ export default function ContactPage() {
                 <div style={{ marginTop: 28 }}>
                   <p
                     style={{
-                      fontFamily: "var(--font-josefin), sans-serif",
+                      fontFamily: "var(--font-inter), sans-serif",
                       fontWeight: 600,
                       fontSize: "0.85rem",
                       color: "var(--text-secondary)",
@@ -213,7 +213,7 @@ export default function ContactPage() {
                           textDecoration: "none",
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.background = "linear-gradient(135deg, #3b82f6, #8b5cf6)";
+                          e.currentTarget.style.background = "linear-gradient(135deg, #8b5cf6, #8b5cf6)";
                           e.currentTarget.style.color = "white";
                           e.currentTarget.style.borderColor = "transparent";
                           e.currentTarget.style.transform = "translateY(-2px)";
@@ -277,7 +277,7 @@ export default function ContactPage() {
                           </motion.div>
                           <h3
                             style={{
-                              fontFamily: "var(--font-josefin), sans-serif",
+                              fontFamily: "var(--font-inter), sans-serif",
                               fontWeight: 700,
                               fontSize: "1.4rem",
                               color: "var(--text-primary)",
@@ -324,7 +324,7 @@ export default function ContactPage() {
                           </motion.div>
                           <h3
                             style={{
-                              fontFamily: "var(--font-josefin), sans-serif",
+                              fontFamily: "var(--font-inter), sans-serif",
                               fontWeight: 700,
                               fontSize: "1.4rem",
                               color: "var(--text-primary)",
@@ -334,7 +334,7 @@ export default function ContactPage() {
                             Oops! Something went wrong.
                           </h3>
                           <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem", maxWidth: 380, marginBottom: 24 }}>
-                            Failed to send your message. Please try again or email me directly at abdullahshaimyofficial@gmail.com.
+                            Failed to send your message. Please try again or email me directly at dev@abdullahshaimy.lk.
                           </p>
                           <button
                             onClick={() => setStatus("idle")}
@@ -348,7 +348,7 @@ export default function ContactPage() {
                     <motion.form key="form" onSubmit={handleSubmit} noValidate>
                       <h2
                         style={{
-                          fontFamily: "var(--font-josefin), sans-serif",
+                          fontFamily: "var(--font-inter), sans-serif",
                           fontWeight: 700,
                           fontSize: "1.3rem",
                           color: "var(--text-primary)",

@@ -28,7 +28,7 @@ export default function ServicesPage() {
             width: 300,
             height: 300,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(139, 92, 246,0.1) 0%, transparent 70%)",
           }}
         />
         <motion.div
@@ -39,7 +39,7 @@ export default function ServicesPage() {
           <span className="section-badge">✦ Services</span>
           <h1
             style={{
-              fontFamily: "var(--font-josefin), sans-serif",
+              fontFamily: "var(--font-inter), sans-serif",
               fontWeight: 800,
               fontSize: "clamp(2rem, 5vw, 3rem)",
               color: "var(--text-primary)",
@@ -65,7 +65,7 @@ export default function ServicesPage() {
                     width: 36,
                     height: 36,
                     borderRadius: 10,
-                    background: "linear-gradient(135deg, #3b82f6, #06b6d4)",
+                    background: "linear-gradient(135deg, #8b5cf6, #00d2ff)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -76,7 +76,7 @@ export default function ServicesPage() {
                 </div>
                 <h2
                   style={{
-                    fontFamily: "var(--font-josefin), sans-serif",
+                    fontFamily: "var(--font-inter), sans-serif",
                     fontWeight: 700,
                     fontSize: "1.6rem",
                     color: "var(--text-primary)",
@@ -117,7 +117,7 @@ export default function ServicesPage() {
                     width: 36,
                     height: 36,
                     borderRadius: 10,
-                    background: "linear-gradient(135deg, #8b5cf6, #ec4899)",
+                    background: "linear-gradient(135deg, #8b5cf6, #8b5cf6)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -128,7 +128,7 @@ export default function ServicesPage() {
                 </div>
                 <h2
                   style={{
-                    fontFamily: "var(--font-josefin), sans-serif",
+                    fontFamily: "var(--font-inter), sans-serif",
                     fontWeight: 700,
                     fontSize: "1.6rem",
                     color: "var(--text-primary)",

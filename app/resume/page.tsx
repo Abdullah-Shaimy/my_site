@@ -27,7 +27,7 @@ export default function ResumePage() {
             width: 400,
             height: 400,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(139, 92, 246,0.1) 0%, transparent 70%)",
           }}
         />
         <motion.div
@@ -38,7 +38,7 @@ export default function ResumePage() {
           <span className="section-badge">✦ Resume</span>
           <h1
             style={{
-              fontFamily: "var(--font-josefin), sans-serif",
+              fontFamily: "var(--font-inter), sans-serif",
               fontWeight: 800,
               fontSize: "clamp(2rem, 5vw, 3rem)",
               color: "var(--text-primary)",
@@ -83,7 +83,7 @@ export default function ResumePage() {
                       width: 40,
                       height: 40,
                       borderRadius: 12,
-                      background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+                      background: "linear-gradient(135deg, #8b5cf6, #8b5cf6)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -93,7 +93,7 @@ export default function ResumePage() {
                   </div>
                   <h2
                     style={{
-                      fontFamily: "var(--font-josefin), sans-serif",
+                      fontFamily: "var(--font-inter), sans-serif",
                       fontWeight: 700,
                       fontSize: "1.5rem",
                       color: "var(--text-primary)",
@@ -123,7 +123,7 @@ export default function ResumePage() {
                             style={{
                               flex: 1,
                               width: 2,
-                              background: "linear-gradient(to bottom, rgba(139,92,246,0.3), transparent)",
+                              background: "linear-gradient(to bottom, rgba(139, 92, 246,0.3), transparent)",
                               marginTop: 6,
                               minHeight: 60,
                             }}
@@ -139,9 +139,9 @@ export default function ResumePage() {
                               display: "inline-block",
                               padding: "3px 10px",
                               borderRadius: 50,
-                              background: "rgba(59,130,246,0.08)",
-                              border: "1px solid rgba(59,130,246,0.2)",
-                              color: "#3b82f6",
+                              background: "rgba(139, 92, 246,0.08)",
+                              border: "1px solid rgba(139, 92, 246,0.2)",
+                              color: "#8b5cf6",
                               fontSize: "0.72rem",
                               fontWeight: 600,
                             }}
@@ -154,7 +154,7 @@ export default function ResumePage() {
                         </div>
                         <h3
                           style={{
-                            fontFamily: "var(--font-josefin), sans-serif",
+                            fontFamily: "var(--font-inter), sans-serif",
                             fontWeight: 700,
                             fontSize: "1rem",
                             color: "var(--text-primary)",
@@ -203,7 +203,7 @@ export default function ResumePage() {
                       width: 40,
                       height: 40,
                       borderRadius: 12,
-                      background: "linear-gradient(135deg, #8b5cf6, #ec4899)",
+                      background: "linear-gradient(135deg, #8b5cf6, #8b5cf6)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -213,7 +213,7 @@ export default function ResumePage() {
                   </div>
                   <h2
                     style={{
-                      fontFamily: "var(--font-josefin), sans-serif",
+                      fontFamily: "var(--font-inter), sans-serif",
                       fontWeight: 700,
                       fontSize: "1.5rem",
                       color: "var(--text-primary)",
@@ -233,9 +233,9 @@ export default function ResumePage() {
                           width: 14,
                           height: 14,
                           borderRadius: "50%",
-                          background: "linear-gradient(135deg, #8b5cf6, #ec4899)",
+                          background: "linear-gradient(135deg, #8b5cf6, #8b5cf6)",
                           border: "3px solid white",
-                          boxShadow: "0 0 0 2px rgba(236,72,153,0.3)",
+                          boxShadow: "0 0 0 2px rgba(139, 92, 246,0.3)",
                           flexShrink: 0,
                           marginTop: 4,
                         }}
@@ -245,7 +245,7 @@ export default function ResumePage() {
                           style={{
                             flex: 1,
                             width: 2,
-                            background: "linear-gradient(to bottom, rgba(236,72,153,0.3), transparent)",
+                            background: "linear-gradient(to bottom, rgba(139, 92, 246,0.3), transparent)",
                             marginTop: 6,
                             minHeight: 60,
                           }}
@@ -264,7 +264,7 @@ export default function ResumePage() {
                       </div>
                       <h3
                         style={{
-                          fontFamily: "var(--font-josefin), sans-serif",
+                          fontFamily: "var(--font-inter), sans-serif",
                           fontWeight: 700,
                           fontSize: "0.95rem",
                           color: "var(--text-primary)",
@@ -282,7 +282,7 @@ export default function ResumePage() {
                       <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 6 }}>
                         {edu.achievements.map((a) => (
                           <li key={a} style={{ fontSize: "0.82rem", color: "var(--text-secondary)", display: "flex", gap: 8, alignItems: "flex-start" }}>
-                            <Star size={12} style={{ color: "#ec4899", flexShrink: 0, marginTop: 3 }} />
+                            <Star size={12} style={{ color: "#8b5cf6", flexShrink: 0, marginTop: 3 }} />
                             {a}
                           </li>
                         ))}

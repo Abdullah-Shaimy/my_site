@@ -64,8 +64,8 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
               height: 100,
               borderRadius: "50%",
               background: isDesign
-                ? "radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)"
-                : "radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)",
+                ? "radial-gradient(circle, rgba(139, 92, 246,0.08) 0%, transparent 70%)"
+                : "radial-gradient(circle, rgba(139, 92, 246,0.08) 0%, transparent 70%)",
               pointerEvents: "none",
             }}
           />
@@ -77,15 +77,15 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
               height: 52,
               borderRadius: 14,
               background: isDesign
-                ? "linear-gradient(135deg, #8b5cf6, #ec4899)"
-                : "linear-gradient(135deg, #3b82f6, #06b6d4)",
+                ? "linear-gradient(135deg, #8b5cf6, #8b5cf6)"
+                : "linear-gradient(135deg, #8b5cf6, #00d2ff)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               marginBottom: 16,
               boxShadow: isDesign
-                ? "0 8px 24px rgba(139,92,246,0.3)"
-                : "0 8px 24px rgba(59,130,246,0.3)",
+                ? "0 8px 24px rgba(139, 92, 246,0.3)"
+                : "0 8px 24px rgba(139, 92, 246,0.3)",
             }}
           >
             <IconComp size={24} color="white" strokeWidth={1.8} />
@@ -100,10 +100,10 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
                 fontSize: "0.72rem",
                 fontWeight: 600,
                 background: isDesign
-                  ? "rgba(139,92,246,0.08)"
-                  : "rgba(59,130,246,0.08)",
-                color: isDesign ? "#8b5cf6" : "#3b82f6",
-                border: `1px solid ${isDesign ? "rgba(139,92,246,0.2)" : "rgba(59,130,246,0.2)"}`,
+                  ? "rgba(139, 92, 246,0.08)"
+                  : "rgba(139, 92, 246,0.08)",
+                color: isDesign ? "#8b5cf6" : "#8b5cf6",
+                border: `1px solid ${isDesign ? "rgba(139, 92, 246,0.2)" : "rgba(139, 92, 246,0.2)"}`,
               }}
             >
               {service.category}
@@ -112,7 +112,7 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
 
           <h3
             style={{
-              fontFamily: "var(--font-josefin), sans-serif",
+              fontFamily: "var(--font-inter), sans-serif",
               fontWeight: 700,
               fontSize: "1.05rem",
               color: "var(--text-primary)",
@@ -139,7 +139,7 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              borderTop: "1px solid rgba(139,92,246,0.08)",
+              borderTop: "1px solid rgba(139, 92, 246,0.08)",
               paddingTop: 16,
               marginTop: "auto",
             }}
@@ -150,10 +150,10 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
               </p>
               <p
                 style={{
-                  fontFamily: "var(--font-josefin), sans-serif",
+                  fontFamily: "var(--font-inter), sans-serif",
                   fontWeight: 700,
                   fontSize: "1rem",
-                  color: isDesign ? "#8b5cf6" : "#3b82f6",
+                  color: isDesign ? "#8b5cf6" : "#8b5cf6",
                 }}
               >
                 {service.startingPrice}
@@ -165,12 +165,12 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
                 height: 36,
                 borderRadius: 10,
                 background: isDesign
-                  ? "rgba(139,92,246,0.1)"
-                  : "rgba(59,130,246,0.1)",
+                  ? "rgba(139, 92, 246,0.1)"
+                  : "rgba(139, 92, 246,0.1)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: isDesign ? "#8b5cf6" : "#3b82f6",
+                color: isDesign ? "#8b5cf6" : "#8b5cf6",
               }}
             >
               <ArrowUpRight size={16} />

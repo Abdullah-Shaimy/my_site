@@ -47,8 +47,8 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
       <section
         style={{
           background: isDesign
-            ? "linear-gradient(135deg, var(--bg-secondary) 0%, rgba(139, 92, 246, 0.05) 50%, rgba(236, 72, 153, 0.05) 100%)"
-            : "linear-gradient(135deg, var(--bg-secondary) 0%, rgba(59, 130, 246, 0.05) 50%, rgba(8, 8, 18, 0.05) 100%)",
+            ? "linear-gradient(135deg, var(--bg-secondary) 0%, rgba(139, 92, 246, 0.05) 50%, rgba(139, 92, 246, 0.05) 100%)"
+            : "linear-gradient(135deg, var(--bg-secondary) 0%, rgba(0, 210, 255, 0.05) 50%, rgba(8, 8, 18, 0.05) 100%)",
           padding: "64px 24px 56px",
           position: "relative",
           overflow: "hidden",
@@ -82,14 +82,14 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
                   height: 72,
                   borderRadius: 20,
                   background: isDesign
-                    ? "linear-gradient(135deg, #8b5cf6, #ec4899)"
-                    : "linear-gradient(135deg, #3b82f6, #06b6d4)",
+                    ? "linear-gradient(135deg, #8b5cf6, #8b5cf6)"
+                    : "linear-gradient(135deg, #00d2ff, #00d2ff)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   boxShadow: isDesign
-                    ? "0 12px 32px rgba(139,92,246,0.35)"
-                    : "0 12px 32px rgba(59,130,246,0.35)",
+                    ? "0 12px 32px rgba(139, 92, 246,0.35)"
+                    : "0 12px 32px rgba(0, 210, 255,0.35)",
                   flexShrink: 0,
                 }}
               >
@@ -101,9 +101,9 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
                     display: "inline-block",
                     padding: "4px 14px",
                     borderRadius: 50,
-                    background: isDesign ? "rgba(139,92,246,0.1)" : "rgba(59,130,246,0.1)",
-                    border: `1px solid ${isDesign ? "rgba(139,92,246,0.25)" : "rgba(59,130,246,0.25)"}`,
-                    color: isDesign ? "#8b5cf6" : "#3b82f6",
+                    background: isDesign ? "rgba(139, 92, 246,0.1)" : "rgba(0, 210, 255,0.1)",
+                    border: `1px solid ${isDesign ? "rgba(139, 92, 246,0.25)" : "rgba(0, 210, 255,0.25)"}`,
+                    color: isDesign ? "#8b5cf6" : "#00d2ff",
                     fontSize: "0.78rem",
                     fontWeight: 600,
                     marginBottom: 8,
@@ -150,7 +150,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
                     overflow: "hidden",
                     position: "relative",
                     marginBottom: 40,
-                    border: "1px solid rgba(139,92,246,0.1)",
+                    border: "1px solid rgba(139, 92, 246,0.1)",
                   }}
                 >
                   <Image
@@ -212,7 +212,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
                     >
                       <CheckCircle
                         size={16}
-                        color={isDesign ? "#8b5cf6" : "#3b82f6"}
+                        color={isDesign ? "#8b5cf6" : "#00d2ff"}
                         style={{ flexShrink: 0, marginTop: 1 }}
                       />
                       <span style={{ fontSize: "0.9rem", color: "var(--text-secondary)" }}>{feature}</span>
@@ -257,13 +257,13 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
                         fontFamily: "var(--font-josefin), sans-serif",
                         fontWeight: 800,
                         fontSize: "2rem",
-                        color: isDesign ? "#8b5cf6" : "#3b82f6",
+                        color: isDesign ? "#8b5cf6" : "#00d2ff",
                       }}
                     >
                       {service.startingPrice}
                     </p>
                   </div>
-                  <div style={{ borderTop: "1px solid rgba(139,92,246,0.08)", paddingTop: 16, marginBottom: 16 }}>
+                  <div style={{ borderTop: "1px solid rgba(139, 92, 246,0.08)", paddingTop: 16, marginBottom: 16 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                       <Clock size={14} color="var(--text-muted)" />
                       <span style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>Timeline</span>

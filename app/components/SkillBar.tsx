@@ -49,7 +49,7 @@ export default function SkillBar({ name, level, delay = 0 }: SkillBarProps) {
         </span>
         <span
           style={{
-            fontFamily: "var(--font-josefin), sans-serif",
+            fontFamily: "var(--font-inter), sans-serif",
             fontWeight: 600,
             fontSize: "0.85rem",
             color: "var(--accent-purple)",

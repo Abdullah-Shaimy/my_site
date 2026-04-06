@@ -40,7 +40,7 @@ export default function PortfolioPage() {
             width: 350,
             height: 350,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(139, 92, 246,0.1) 0%, transparent 70%)",
           }}
         />
         <motion.div
@@ -51,7 +51,7 @@ export default function PortfolioPage() {
           <span className="section-badge">✦ Portfolio</span>
           <h1
             style={{
-              fontFamily: "var(--font-josefin), sans-serif",
+              fontFamily: "var(--font-inter), sans-serif",
               fontWeight: 800,
               fontSize: "clamp(2rem, 5vw, 3rem)",
               color: "var(--text-primary)",
@@ -78,10 +78,10 @@ export default function PortfolioPage() {
                   style={{
                     padding: "9px 22px",
                     borderRadius: 50,
-                    border: active === cat ? "none" : "1.5px solid rgba(139,92,246,0.2)",
+                    border: active === cat ? "none" : "1.5px solid rgba(139, 92, 246,0.2)",
                     background:
                       active === cat
-                        ? "linear-gradient(135deg, #3b82f6, #8b5cf6)"
+                        ? "linear-gradient(135deg, #8b5cf6, #8b5cf6)"
                         : "transparent",
                     color: active === cat ? "white" : "var(--text-secondary)",
                     fontFamily: "Inter, sans-serif",
@@ -89,7 +89,7 @@ export default function PortfolioPage() {
                     fontSize: "0.88rem",
                     cursor: "pointer",
                     transition: "all 0.2s",
-                    boxShadow: active === cat ? "0 4px 16px rgba(139,92,246,0.3)" : "none",
+                    boxShadow: active === cat ? "0 4px 16px rgba(139, 92, 246,0.3)" : "none",
                   }}
                 >
                   {cat}

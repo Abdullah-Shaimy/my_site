@@ -22,8 +22,8 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
       <section
         style={{
           background: isDesign
-            ? "linear-gradient(135deg, var(--bg-secondary) 0%, rgba(139, 92, 246, 0.05) 50%, rgba(236, 72, 153, 0.05) 100%)"
-            : "linear-gradient(135deg, var(--bg-secondary) 0%, rgba(59, 130, 246, 0.05) 50%, rgba(8, 8, 18, 0.05) 100%)",
+            ? "linear-gradient(135deg, var(--bg-secondary) 0%, rgba(139, 92, 246, 0.05) 50%, rgba(139, 92, 246, 0.05) 100%)"
+            : "linear-gradient(135deg, var(--bg-secondary) 0%, rgba(0, 210, 255, 0.05) 50%, rgba(8, 8, 18, 0.05) 100%)",
           padding: "64px 24px 56px",
           position: "relative",
           overflow: "hidden",
@@ -39,8 +39,8 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
             height: 300,
             borderRadius: "50%",
             background: isDesign
-              ? "radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%)",
+              ? "radial-gradient(circle, rgba(139, 92, 246,0.1) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(0, 210, 255,0.1) 0%, transparent 70%)",
             pointerEvents: "none",
           }}
         />
@@ -73,9 +73,9 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                 style={{
                   padding: "4px 14px",
                   borderRadius: 50,
-                  background: isDesign ? "rgba(139,92,246,0.1)" : "rgba(59,130,246,0.1)",
-                  border: `1px solid ${isDesign ? "rgba(139,92,246,0.25)" : "rgba(59,130,246,0.25)"}`,
-                  color: isDesign ? "#8b5cf6" : "#3b82f6",
+                  background: isDesign ? "rgba(139, 92, 246,0.1)" : "rgba(0, 210, 255,0.1)",
+                  border: `1px solid ${isDesign ? "rgba(139, 92, 246,0.25)" : "rgba(0, 210, 255,0.25)"}`,
+                  color: isDesign ? "#8b5cf6" : "#00d2ff",
                   fontSize: "0.78rem",
                   fontWeight: 600,
                 }}
@@ -87,9 +87,9 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                   style={{
                     padding: "4px 14px",
                     borderRadius: 50,
-                    background: "rgba(236,72,153,0.08)",
-                    border: "1px solid rgba(236,72,153,0.2)",
-                    color: "#ec4899",
+                    background: "rgba(139, 92, 246,0.08)",
+                    border: "1px solid rgba(139, 92, 246,0.2)",
+                    color: "#8b5cf6",
                     fontSize: "0.78rem",
                     fontWeight: 600,
                   }}
@@ -149,7 +149,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                     overflow: "hidden",
                     position: "relative",
                     marginBottom: 40,
-                    border: "1px solid rgba(139,92,246,0.1)",
+                    border: "1px solid rgba(139, 92, 246,0.1)",
                     boxShadow: "0 20px 40px rgba(0,0,0,0.05)",
                   }}
                 >

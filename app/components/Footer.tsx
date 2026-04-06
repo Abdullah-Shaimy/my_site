@@ -57,7 +57,7 @@ export default function Footer() {
                   width: 34,
                   height: 34,
                   borderRadius: 10,
-                  background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+                  background: "linear-gradient(135deg, #00d2ff, #8b5cf6)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -70,7 +70,7 @@ export default function Footer() {
                   fontFamily: "var(--font-josefin), sans-serif",
                   fontWeight: 700,
                   fontSize: "1.1rem",
-                  background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+                  background: "linear-gradient(135deg, #00d2ff, #8b5cf6)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -213,7 +213,7 @@ export default function Footer() {
           style={{
             height: 1,
             background:
-              "linear-gradient(90deg, transparent, rgba(139,92,246,0.2), transparent)",
+              "linear-gradient(90deg, transparent, rgba(139, 92, 246,0.2), transparent)",
             marginBottom: 24,
           }}
         />
@@ -240,7 +240,7 @@ export default function Footer() {
             © 2025 Abdullah Shaimy. Made with{" "}
             <Heart
               size={14}
-              style={{ color: "#ec4899", fill: "#ec4899" }}
+              style={{ color: "#8b5cf6", fill: "#8b5cf6" }}
             />{" "}
             from Sri Lanka
           </p>
@@ -248,7 +248,7 @@ export default function Footer() {
             Designed & Developed by{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+                background: "linear-gradient(135deg, #00d2ff, #8b5cf6)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",

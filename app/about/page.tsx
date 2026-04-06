@@ -31,7 +31,7 @@ export default function AboutPage() {
             width: 300,
             height: 300,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(139, 92, 246,0.1) 0%, transparent 70%)",
           }}
         />
         <div className="container-custom">
@@ -55,9 +55,9 @@ export default function AboutPage() {
                   width: 180,
                   height: 180,
                   borderRadius: "50%",
-                  background: "linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)",
+                  background: "linear-gradient(135deg, #8b5cf6, #8b5cf6, #8b5cf6)",
                   padding: 4,
-                  boxShadow: "0 20px 60px rgba(139,92,246,0.3)",
+                  boxShadow: "0 20px 60px rgba(139, 92, 246,0.3)",
                   overflow: "hidden",
                 }}
               >
@@ -109,7 +109,7 @@ export default function AboutPage() {
               </div>
               <h1
                 style={{
-                  fontFamily: "var(--font-josefin), sans-serif",
+                  fontFamily: "var(--font-inter), sans-serif",
                   fontWeight: 800,
                   fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
                   color: "var(--text-primary)",
@@ -130,7 +130,7 @@ export default function AboutPage() {
                   <MapPin size={14} color="#8b5cf6" /> Sri Lanka 🇱🇰
                 </span>
                 <span style={{ display: "flex", alignItems: "center", gap: 6, color: "var(--text-muted)", fontSize: "0.9rem" }}>
-                  <Calendar size={14} color="#3b82f6" /> 2+ Years Experience
+                  <Calendar size={14} color="#8b5cf6" /> 2+ Years Experience
                 </span>
               </div>
               <p style={{ color: "var(--text-secondary)", fontSize: "1rem", lineHeight: 1.7, maxWidth: 560, marginBottom: 24 }}>
@@ -166,7 +166,7 @@ export default function AboutPage() {
                  <span className="section-badge">✦ My Story</span>
                  <h2
                    style={{
-                     fontFamily: "var(--font-josefin), sans-serif",
+                     fontFamily: "var(--font-inter), sans-serif",
                      fontWeight: 700,
                     fontSize: "1.8rem",
                     color: "var(--text-primary)",
@@ -200,7 +200,7 @@ export default function AboutPage() {
                 <div style={{ marginTop: 32 }}>
                   <h3
                     style={{
-                      fontFamily: "var(--font-josefin), sans-serif",
+                      fontFamily: "var(--font-inter), sans-serif",
                       fontWeight: 600,
                       fontSize: "1rem",
                       color: "var(--text-primary)",
@@ -227,7 +227,7 @@ export default function AboutPage() {
                 <span className="section-badge">✦ Proficiency</span>
                 <h2
                   style={{
-                    fontFamily: "var(--font-josefin), sans-serif",
+                    fontFamily: "var(--font-inter), sans-serif",
                     fontWeight: 700,
                     fontSize: "1.8rem",
                     color: "var(--text-primary)",
@@ -242,12 +242,12 @@ export default function AboutPage() {
               <ScrollReveal delay={0.15}>
                 <h4
                   style={{
-                    fontFamily: "var(--font-josefin), sans-serif",
+                    fontFamily: "var(--font-inter), sans-serif",
                     fontWeight: 600,
                     fontSize: "0.85rem",
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
-                    color: "#3b82f6",
+                    color: "#8b5cf6",
                     marginBottom: 16,
                   }}
                 >
@@ -262,7 +262,7 @@ export default function AboutPage() {
               <ScrollReveal delay={0.2}>
                 <h4
                   style={{
-                    fontFamily: "var(--font-josefin), sans-serif",
+                    fontFamily: "var(--font-inter), sans-serif",
                     fontWeight: 600,
                     fontSize: "0.85rem",
                     textTransform: "uppercase",
@@ -283,12 +283,12 @@ export default function AboutPage() {
               <ScrollReveal delay={0.25}>
                 <h4
                   style={{
-                    fontFamily: "var(--font-josefin), sans-serif",
+                    fontFamily: "var(--font-inter), sans-serif",
                     fontWeight: 600,
                     fontSize: "0.85rem",
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
-                    color: "#ec4899",
+                    color: "#8b5cf6",
                     marginBottom: 16,
                     marginTop: 24,
                   }}
@@ -317,7 +317,7 @@ export default function AboutPage() {
               <span className="section-badge">✦ My Values</span>
               <h2
                 style={{
-                  fontFamily: "var(--font-josefin), sans-serif",
+                  fontFamily: "var(--font-inter), sans-serif",
                   fontWeight: 700,
                   fontSize: "2rem",
                   color: "var(--text-primary)",
@@ -345,7 +345,7 @@ export default function AboutPage() {
                   <div style={{ fontSize: "2.5rem", marginBottom: 12 }}>{v.emoji}</div>
                   <h3
                     style={{
-                      fontFamily: "var(--font-josefin), sans-serif",
+                      fontFamily: "var(--font-inter), sans-serif",
                       fontWeight: 700,
                       fontSize: "1.05rem",
                       color: "var(--text-primary)",

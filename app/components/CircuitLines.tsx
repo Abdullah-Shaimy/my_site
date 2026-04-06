@@ -79,7 +79,7 @@ export default function CircuitLines() {
     function colors() {
       return isDark()
         ? ["rgba(96,165,250,", "rgba(167,139,250,", "rgba(244,114,182,", "rgba(52,211,153,"]
-        : ["rgba(59,130,246,", "rgba(139,92,246,", "rgba(236,72,153,", "rgba(16,185,129,"];
+        : ["rgba(139, 92, 246,", "rgba(139, 92, 246,", "rgba(139, 92, 246,", "rgba(16,185,129,"];
     }
 
     function spawn() {

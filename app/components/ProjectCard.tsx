@@ -12,14 +12,14 @@ interface ProjectCardProps {
 
 const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
   Designing: {
-    bg: "rgba(139,92,246,0.08)",
+    bg: "rgba(139, 92, 246,0.08)",
     text: "#8b5cf6",
-    border: "rgba(139,92,246,0.2)",
+    border: "rgba(139, 92, 246,0.2)",
   },
   Development: {
-    bg: "rgba(59,130,246,0.08)",
-    text: "#3b82f6",
-    border: "rgba(59,130,246,0.2)",
+    bg: "rgba(139, 92, 246,0.08)",
+    text: "#8b5cf6",
+    border: "rgba(139, 92, 246,0.2)",
   },
 };
 
@@ -65,8 +65,8 @@ export default function ProjectCard({ project, index = 0 }: ProjectCardProps) {
                 borderRadius: 20,
                 background:
                   project.category === "Designing"
-                    ? "linear-gradient(135deg, #8b5cf6, #ec4899)"
-                    : "linear-gradient(135deg, #3b82f6, #06b6d4)",
+                    ? "linear-gradient(135deg, #8b5cf6, #8b5cf6)"
+                    : "linear-gradient(135deg, #8b5cf6, #00d2ff)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -131,7 +131,7 @@ export default function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             </div>
             <h3
               style={{
-                fontFamily: "var(--font-josefin), sans-serif",
+                fontFamily: "var(--font-inter), sans-serif",
                 fontWeight: 700,
                 fontSize: "1.05rem",
                 color: "var(--text-primary)",

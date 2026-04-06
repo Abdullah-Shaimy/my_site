@@ -4,9 +4,9 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import React, { useRef, useState } from "react";
 
 const statsData = [
-  { value: "100+", label: "Projects Managed", color: "#3b82f6" },
+  { value: "100+", label: "Projects Managed", color: "#8b5cf6" },
   { value: "90+", label: "Happy Clients", color: "#8b5cf6" },
-  { value: "2+", label: "Years Experience", color: "#ec4899" },
+  { value: "2+", label: "Years Experience", color: "#8b5cf6" },
   { value: "24h", label: "Response Time", color: "#22c55e" },
 ];
 
@@ -82,7 +82,7 @@ const StatCard = ({ stat, index }: { stat: typeof statsData[0], index: number })
             transition={{ type: "spring", stiffness: 300, damping: 10 }}
             className="text-3xl md:text-4xl font-extrabold mb-0.5 font-josefin"
             style={{
-              fontFamily: "var(--font-josefin), sans-serif",
+              fontFamily: "var(--font-inter), sans-serif",
               fontWeight: 800,
               background: `linear-gradient(135deg, ${stat.color}, #fff)`,
               WebkitBackgroundClip: "text",
