@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut, LogIn } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
+import { useAuth } from "../lib/AuthContext";
+import { supabase } from "../lib/supabase";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -19,9 +21,18 @@ const navLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const { user, loading } = useAuth();
   useTheme(); // keep context subscription; no values needed
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setUserMenuOpen(false);
+    router.refresh();
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -144,6 +155,86 @@ export default function Navbar() {
 
           {/* Right: CTA & Mobile Hamburger */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 12 }}>
+
+            {!loading && (
+              user ? (
+                <div style={{ position: "relative" }}>
+                  <button
+                    onClick={() => setUserMenuOpen(!userMenuOpen)}
+                    style={{
+                      background: "rgba(139, 92, 246, 0.1)",
+                      border: "1px solid rgba(139, 92, 246, 0.2)",
+                      borderRadius: "50%",
+                      width: 38,
+                      height: 38,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#8b5cf6",
+                      cursor: "pointer",
+                      transition: "all 0.2s"
+                    }}
+                    aria-label="User Menu"
+                    onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(139, 92, 246, 0.2)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(139, 92, 246, 0.1)"; }}
+                  >
+                    <User size={18} />
+                  </button>
+                  <AnimatePresence>
+                    {userMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.15 }}
+                        style={{
+                          position: "absolute",
+                          top: "100%",
+                          right: 0,
+                          marginTop: 8,
+                          background: "var(--glass-bg)",
+                          border: "1px solid var(--glass-border)",
+                          borderRadius: 12,
+                          padding: "8px",
+                          boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+                          minWidth: 180,
+                          backdropFilter: "blur(20px)",
+                          zIndex: 100,
+                        }}
+                      >
+                        <div style={{ padding: "8px 12px", borderBottom: "1px solid var(--glass-border)", marginBottom: 8 }}>
+                          <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                            {user.email}
+                          </p>
+                        </div>
+                        <button
+                          onClick={handleSignOut}
+                          style={{
+                            width: "100%",
+                            padding: "8px 12px",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 8,
+                            background: "transparent",
+                            border: "none",
+                            color: "#ef4444",
+                            fontSize: "0.85rem",
+                            cursor: "pointer",
+                            textAlign: "left",
+                            borderRadius: 6,
+                            transition: "background 0.2s"
+                          }}
+                          onMouseEnter={(e) => e.currentTarget.style.background = "rgba(239, 68, 68, 0.1)"}
+                          onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+                        >
+                          <LogOut size={16} /> Sign Out
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : null
+            )}
 
             <a
               href="https://wa.me/94771367326"

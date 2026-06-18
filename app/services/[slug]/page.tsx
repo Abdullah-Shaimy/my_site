@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useAuth } from "../../lib/AuthContext";
 import {
   ArrowLeft,
   Clock,
@@ -38,6 +39,8 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
   const service = services.find((s) => s.slug === slug);
   if (!service) notFound();
 
+  const { user } = useAuth();
+  
   const isDesign = service.category === "Designing";
   const IconComp = iconMap[service.icon] || Layers;
 
@@ -272,7 +275,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ slug: 
                       {service.duration}
                     </p>
                   </div>
-                  <Link href="/contact" className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
+                  <Link href={user ? "/contact" : `/login?redirect=/services/${slug}`} className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
                     Get Started
                   </Link>
                 </div>

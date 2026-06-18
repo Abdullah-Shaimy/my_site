@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import CircuitLines from "./components/CircuitLines";
-import { ThemeProvider } from "./components/ThemeProvider";
+import { ClientProviders } from "./components/ClientProviders";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://abdullahshaimy.dev";
 
@@ -94,12 +94,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <ThemeProvider>
+        <ClientProviders>
           <CircuitLines />
           <Navbar />
           <main>{children}</main>
           <Footer />
-        </ThemeProvider>
+        </ClientProviders>
       </body>
     </html>
   );
