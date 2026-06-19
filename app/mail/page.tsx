@@ -17,14 +17,18 @@ export default async function MailPage() {
   const cookieStore = await cookies();
   const accessKeyCookie = cookieStore.get("mail_access_key");
   let isAuthorized = false;
+  let senderEmail = "";
+  let templates = [];
 
   if (accessKeyCookie && accessKeyCookie.value) {
     try {
-      const { data: isValid, error } = await supabase.rpc("verify_mail_access_key", {
+      const { data, error } = await supabase.rpc("get_mail_sender_info", {
         input_key: accessKeyCookie.value,
       });
-      if (!error && isValid) {
+      if (!error && data && data.length > 0) {
         isAuthorized = true;
+        senderEmail = data[0].sender_email;
+        templates = data[0].templates;
       }
     } catch (e) {
       console.error("Failed to verify authorization cookie server-side:", e);
@@ -33,7 +37,11 @@ export default async function MailPage() {
 
   return (
     <div className="relative w-full">
-      {isAuthorized ? <MailDashboard /> : <AccessKeyScreen />}
+      {isAuthorized ? (
+        <MailDashboard senderEmail={senderEmail} templates={templates} />
+      ) : (
+        <AccessKeyScreen />
+      )}
     </div>
   );
 }

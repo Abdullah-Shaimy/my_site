@@ -16,13 +16,25 @@ import { sendEmailAction, logoutAction } from "../../lib/mailActions";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
+interface Template {
+  title: string;
+  description?: string;
+  subject: string;
+  body: string;
+}
+
+interface MailDashboardProps {
+  senderEmail: string;
+  templates: Template[];
+}
+
 interface Toast {
   id: string;
   type: "success" | "error";
   message: string;
 }
 
-export default function MailDashboard() {
+export default function MailDashboard({ senderEmail, templates = [] }: MailDashboardProps) {
   const [to, setTo] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
@@ -188,9 +200,16 @@ export default function MailDashboard() {
           >
             Secure Mail Gateway
           </h1>
-          <p style={{ color: "var(--text-secondary)", fontSize: "1rem", maxWidth: 480, margin: "0 auto" }}>
+          <p style={{ color: "var(--text-secondary)", fontSize: "1rem", maxWidth: 480, margin: "0 auto 16px" }}>
             Private mailing system control panel for verified domains.
           </p>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", borderRadius: 20, backgroundColor: "rgba(6, 182, 212, 0.08)", border: "1px solid rgba(6, 182, 212, 0.2)", fontSize: "0.85rem", color: "#22d3ee", fontWeight: 500 }} className="shadow-lg shadow-cyan-500/5">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+            </span>
+            <span>Identity: {senderEmail}</span>
+          </div>
         </motion.div>
       </section>
 
@@ -378,53 +397,26 @@ export default function MailDashboard() {
                   <div style={{ marginBottom: 4 }}>
                     <span style={{ display: "block", marginBottom: 8 }} className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Draft Templates</span>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10 }}>
-                      <button
-                        type="button"
-                        onClick={() => selectPresetTemplate(
-                          "Connection Diagnostic Test",
-                          "Hi Abdullah,\n\nThis is an automated system diagnostic test to verify the secure email delivery pathway.\n\nSender: dev@abdullahshaimy.lk\nStatus: Secure / Fully Operational."
-                        )}
-                        className="group min-w-0 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 hover:bg-cyan-500/[0.02] text-left text-gray-300 hover:text-white transition-all duration-200 flex flex-col gap-1 cursor-pointer"
-                      >
-                        <span className="block max-w-full truncate font-bold text-cyan-300 group-hover:text-cyan-200 text-xs">Connection Diagnostic Test</span>
-                        <span className="block max-w-full truncate text-[10px] text-gray-500 group-hover:text-gray-400">automated system diagnostic test to verify...</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => selectPresetTemplate(
-                          "Portfolio Update Notification",
-                          "Hi Abdullah,\n\nYour portfolio website contact and email components have been successfully configured with production settings.\n\nAll DNS records (SPF, DKIM, DMARC) are fully aligned."
-                        )}
-                        className="group min-w-0 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 hover:bg-cyan-500/[0.02] text-left text-gray-300 hover:text-white transition-all duration-200 flex flex-col gap-1 cursor-pointer"
-                      >
-                        <span className="block max-w-full truncate font-bold text-cyan-300 group-hover:text-cyan-200 text-xs">Portfolio Update Notification</span>
-                        <span className="block max-w-full truncate text-[10px] text-gray-500 group-hover:text-gray-400">Your portfolio website contact and email...</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => selectPresetTemplate(
-                          "Scheduled Server Maintenance Alert",
-                          "Hi Abdullah,\n\nPlease be informed that the primary API routing and web servers will undergo scheduled maintenance to deploy OS patches.\n\nDate: Tomorrow\nDuration: 30 minutes (2:00 AM - 2:30 AM UTC)\nExpected Impact: Temporary routing latency."
-                        )}
-                        className="group min-w-0 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 hover:bg-cyan-500/[0.02] text-left text-gray-300 hover:text-white transition-all duration-200 flex flex-col gap-1 cursor-pointer"
-                      >
-                        <span className="block max-w-full truncate font-bold text-cyan-300 group-hover:text-cyan-200 text-xs">Server Maintenance Alert</span>
-                        <span className="block max-w-full truncate text-[10px] text-gray-500 group-hover:text-gray-400">scheduled maintenance to deploy OS patches...</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => selectPresetTemplate(
-                          "Project Discussion Follow-up",
-                          "Hi [Name],\n\nThanks for taking the time to connect today. I’ve summarized our initial ideas and drafted a roadmap proposal for your project.\n\nLet me know if this works for you, and we can schedule a quick review call to align on details.\n\nBest regards,\nAbdullah Shaimy"
-                        )}
-                        className="group min-w-0 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 hover:bg-cyan-500/[0.02] text-left text-gray-300 hover:text-white transition-all duration-200 flex flex-col gap-1 cursor-pointer"
-                      >
-                        <span className="block max-w-full truncate font-bold text-cyan-300 group-hover:text-cyan-200 text-xs">Project Discussion Follow-up</span>
-                        <span className="block max-w-full truncate text-[10px] text-gray-500 group-hover:text-gray-400">Roadmap proposal and schedule a quick review...</span>
-                      </button>
+                      {templates.map((template, index) => (
+                        <button
+                          key={index}
+                          type="button"
+                          onClick={() => selectPresetTemplate(template.subject, template.body)}
+                          className="group min-w-0 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 hover:bg-cyan-500/[0.02] text-left text-gray-300 hover:text-white transition-all duration-200 flex flex-col gap-1 cursor-pointer"
+                        >
+                          <span className="block max-w-full truncate font-bold text-cyan-300 group-hover:text-cyan-200 text-xs">
+                            {template.title}
+                          </span>
+                          <span className="block max-w-full truncate text-[10px] text-gray-500 group-hover:text-gray-400">
+                            {template.description || (template.body.length > 50 ? template.body.slice(0, 50) + "..." : template.body)}
+                          </span>
+                        </button>
+                      ))}
+                      {templates.length === 0 && (
+                        <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] text-center text-xs text-gray-500 italic">
+                          No draft templates configured for this identity.
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

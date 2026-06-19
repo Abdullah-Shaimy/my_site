@@ -106,24 +106,36 @@ export async function sendEmailAction(formData: {
   subject: string;
   message: string;
 }) {
-  // 1. Authenticate user
-  const isAuthorized = await checkIsAuthorized();
-  if (!isAuthorized) {
-    return { success: false, error: "Unauthorized. Please enter a valid access key." };
-  }
-
   const { to, subject, message } = formData;
 
-  // 2. Validate fields are present
+  // 1. Validate fields are present
   if (!to || !subject || !message) {
     return { success: false, error: "All fields are required" };
   }
 
-  // 3. Validate email format
+  // 2. Validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(to)) {
     return { success: false, error: "Please provide a valid recipient email address" };
   }
+
+  // 3. Authenticate user and resolve sender identity
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get("mail_access_key");
+  
+  if (!cookie || !cookie.value) {
+    return { success: false, error: "Unauthorized. Please enter a valid access key." };
+  }
+
+  const { data, error: dbError } = await supabase.rpc("get_mail_sender_info", {
+    input_key: cookie.value,
+  });
+
+  if (dbError || !data || data.length === 0) {
+    return { success: false, error: "Unauthorized. Invalid access key." };
+  }
+
+  const senderEmail = data[0].sender_email;
 
   // 4. Sanitize inputs to prevent script injections
   const sanitizedTo = sanitize(to.trim());
@@ -179,7 +191,7 @@ export async function sendEmailAction(formData: {
     `;
 
     const sendResult = await resend.emails.send({
-      from: "dev@abdullahshaimy.lk",
+      from: `Abdullah Shaimy <${senderEmail}>`,
       to: sanitizedTo,
       subject: sanitizedSubject,
       text: sanitizedMessage, // Plain text fallback
