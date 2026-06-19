@@ -70,7 +70,7 @@ export async function verifyAccessKeyAction(key: string) {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: 60 * 60 * 24, // 24 hours
+        maxAge: 60 * 60 * 3, // 3 hours
         path: "/",
       });
       return { success: true };
