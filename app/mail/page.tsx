@@ -32,7 +32,7 @@ export default async function MailPage() {
   }
 
   return (
-    <div className="relative min-h-[90vh] flex flex-col justify-center py-12">
+    <div className="relative w-full">
       {isAuthorized ? <MailDashboard /> : <AccessKeyScreen />}
     </div>
   );
