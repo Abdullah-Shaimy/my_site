@@ -257,6 +257,15 @@ export default function Footer() {
               </Link>
               <span>•</span>
               <Link 
+                href="/terms-conditions" 
+                style={{ color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}
+                onMouseEnter={(e) => e.currentTarget.style.color = "var(--text-primary)"}
+                onMouseLeave={(e) => e.currentTarget.style.color = "var(--text-muted)"}
+              >
+                Terms & Conditions
+              </Link>
+              <span>•</span>
+              <Link 
                 href="/refund-policy" 
                 style={{ color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}
                 onMouseEnter={(e) => e.currentTarget.style.color = "var(--text-primary)"}
