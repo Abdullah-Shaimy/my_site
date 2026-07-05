@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
 import dynamic from "next/dynamic";
-import { ArrowRight, Eye } from "lucide-react";
+import { ArrowRight, Briefcase } from "lucide-react";
 import AnimatedText from "./components/AnimatedText";
 import ScrollReveal from "./components/ScrollReveal";
 const LiquidStats = dynamic(() => import("./components/LiquidStats"), {
@@ -138,9 +138,9 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.5 }}
                 style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 36 }}
               >
-                <Link href="/portfolio" className="btn-primary">
-                  <Eye size={16} />
-                  View Portfolio
+                <Link href="/services" className="btn-primary">
+                  <Briefcase size={16} />
+                  Explore Services
                 </Link>
                 <Link href="/contact" className="btn-secondary">
                   Hire Me
@@ -454,62 +454,47 @@ export default function HomePage() {
               },
             ].map((item, i) => (
               <ScrollReveal key={item.slug} delay={i * 0.15}>
-                <Link
-                  href={`/portfolio/${item.slug}`}
-                  style={{ textDecoration: "none" }}
+                <div
+                  className="glass-card"
+                  style={{
+                    padding: "28px",
+                  }}
                 >
                   <div
-                    className="glass-card"
                     style={{
-                      padding: "28px",
-                      cursor: "pointer",
+                      fontSize: "2.5rem",
+                      marginBottom: 12,
                     }}
                   >
-                    <div
-                      style={{
-                        fontSize: "2.5rem",
-                        marginBottom: 12,
-                      }}
-                    >
-                      {item.emoji}
-                    </div>
-                    <span
-                      style={{
-                        fontSize: "0.75rem",
-                        fontWeight: 600,
-                        color:
-                          item.cat === "Designing" ? "var(--accent-purple)" : "var(--accent-blue)",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.05em",
-                      }}
-                    >
-                      {item.cat}
-                    </span>
-                    <h3
-                      style={{
-                        fontFamily: "var(--font-josefin), sans-serif",
-                        fontWeight: 700,
-                        fontSize: "1rem",
-                        color: "var(--text-primary)",
-                        marginTop: 6,
-                      }}
-                    >
-                      {item.title}
-                    </h3>
+                    {item.emoji}
                   </div>
-                </Link>
+                  <span
+                    style={{
+                      fontSize: "0.75rem",
+                      fontWeight: 600,
+                      color:
+                        item.cat === "Designing" ? "var(--accent-purple)" : "var(--accent-blue)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    {item.cat}
+                  </span>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-josefin), sans-serif",
+                      fontWeight: 700,
+                      fontSize: "1rem",
+                      color: "var(--text-primary)",
+                      marginTop: 6,
+                    }}
+                  >
+                    {item.title}
+                  </h3>
+                </div>
               </ScrollReveal>
             ))}
           </div>
-
-          <ScrollReveal delay={0.4}>
-            <div style={{ textAlign: "center", marginTop: 40 }}>
-              <Link href="/portfolio" className="btn-primary">
-                View All Projects
-                <ArrowRight size={16} />
-              </Link>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 

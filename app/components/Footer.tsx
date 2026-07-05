@@ -6,7 +6,6 @@ import { Heart, Zap } from "lucide-react";
 
 const footerLinks = [
   { href: "/about", label: "About" },
-  { href: "/portfolio", label: "Portfolio" },
   { href: "/services", label: "Services" },
   { href: "/resume", label: "Resume" },
   { href: "/contact", label: "Contact" },
