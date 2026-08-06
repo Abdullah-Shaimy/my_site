@@ -17,6 +17,19 @@ export interface Education {
   duration: string;
   description: string;
   achievements: string[];
+  certificateLink?: string;
+}
+
+export interface Certification {
+  id: string;
+  title: string;
+  issuer: string;
+  location: string;
+  issueDate: string;
+  description: string;
+  skills: string[];
+  certificateLink?: string;
+  badgeUrl?: string;
 }
 
 export const experiences: Experience[] = [
@@ -34,6 +47,25 @@ export const experiences: Experience[] = [
       "Crafting clean, professional brand identities using the Adobe Creative Suite",
       "Delivering end-to-end digital solutions from UI/UX design to final deployment",
     ],
+  },
+];
+
+export const certifications: Certification[] = [
+  {
+    id: "pcep-python",
+    title: "PCEP – Certified Entry-Level Python Programmer",
+    issuer: "Python Institute (OpenEDG)",
+    location: "Global Certification",
+    issueDate: "Certified 2026",
+    description:
+      "Successfully passed the Python Institute PCEP certification, validating foundational Python programming skills and problem-solving abilities.",
+    skills: [
+      "Procedural Programming & Data Structures",
+      "Control Flow, Functions & Exceptions",
+      "Official OpenEDG Certification",
+    ],
+    certificateLink: "https://verify.openedg.org/?id=ioef.b3bP.jYSm",
+    badgeUrl: "/pcep-badge.png",
   },
 ];
 

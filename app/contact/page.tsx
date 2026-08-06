@@ -191,6 +191,7 @@ export default function ContactPage() {
                   <div style={{ display: "flex", gap: 10 }}>
                     {[
                       { href: "https://www.linkedin.com/in/abdullahshaimy/", icon: "/icons/linkedin.png", label: "LinkedIn" },
+                      { href: "https://www.instagram.com/shaimy_twenty4/", icon: "/icons/instagram.png", label: "Instagram" },
                       { href: "https://www.behance.net/abdullahshaimy/", icon: "/icons/behance.png", label: "Behance" },
                     ].map(({ href, icon: Icon, label }) => (
                       <a

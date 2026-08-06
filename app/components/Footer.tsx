@@ -13,6 +13,7 @@ const footerLinks = [
 
 const socialLinks = [
   { href: "https://www.linkedin.com/in/abdullahshaimy/", icon: "/icons/linkedin.png", label: "LinkedIn" },
+  { href: "https://www.instagram.com/shaimy_twenty4/", icon: "/icons/instagram.png", label: "Instagram" },
   { href: "https://www.behance.net/abdullahshaimy/", icon: "/icons/behance.png", label: "Behance" },
 ];
 
@@ -192,18 +193,51 @@ export default function Footer() {
                 </a>
               ))}
             </div>
+          </div>
+
+          {/* Certification Badge */}
+          <div>
             <p
               style={{
-                marginTop: 16,
+                fontFamily: "var(--font-josefin), sans-serif",
+                fontWeight: 600,
                 fontSize: "0.85rem",
-                color: "var(--text-muted)",
+                color: "var(--text-secondary)",
+                marginBottom: 12,
+                textTransform: "uppercase",
+                letterSpacing: "0.05em",
               }}
             >
-              📍 Sri Lanka
+              Certification
             </p>
-            <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
-              🌐 Available Worldwide
-            </p>
+            <a
+              href="https://verify.openedg.org/?id=ioef.b3bP.jYSm"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="PCEP – Certified Entry-Level Python Programmer"
+              style={{
+                display: "inline-block",
+                transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease",
+                borderRadius: 12,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px) scale(1.05)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "none";
+              }}
+            >
+              <Image
+                src="/pcep-badge.png"
+                alt="PCEP Certified Entry-Level Python Programmer Badge"
+                width={100}
+                height={100}
+                style={{
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 6px 16px rgba(139, 92, 246, 0.3))",
+                }}
+              />
+            </a>
           </div>
         </div>
 
@@ -227,67 +261,43 @@ export default function Footer() {
             gap: 16,
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            <p
-              style={{
-                fontSize: "0.85rem",
-                color: "var(--text-muted)",
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-                margin: 0,
-              }}
-            >
-              © {new Date().getFullYear()} Abdullah Shaimy. Made with{" "}
-              <Heart
-                size={14}
-                style={{ color: "#8b5cf6", fill: "#8b5cf6" }}
-              />{" "}
-              from Sri Lanka
-            </p>
-            <div style={{ display: "flex", gap: 16, fontSize: "0.8rem", color: "var(--text-muted)" }}>
-              <Link 
-                href="/privacy-policy" 
-                style={{ color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={(e) => e.currentTarget.style.color = "var(--text-primary)"}
-                onMouseLeave={(e) => e.currentTarget.style.color = "var(--text-muted)"}
-              >
-                Privacy Policy
-              </Link>
-              <span>•</span>
-              <Link 
-                href="/terms-conditions" 
-                style={{ color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={(e) => e.currentTarget.style.color = "var(--text-primary)"}
-                onMouseLeave={(e) => e.currentTarget.style.color = "var(--text-muted)"}
-              >
-                Terms & Conditions
-              </Link>
-              <span>•</span>
-              <Link 
-                href="/refund-policy" 
-                style={{ color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={(e) => e.currentTarget.style.color = "var(--text-primary)"}
-                onMouseLeave={(e) => e.currentTarget.style.color = "var(--text-muted)"}
-              >
-                Refund Policy
-              </Link>
-            </div>
-          </div>
-          <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: 0 }}>
-            Designed & Developed by{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #00d2ff, #8b5cf6)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                fontWeight: 600,
-              }}
-            >
-              Abdullah Shaimy
-            </span>
+          <p
+            style={{
+              fontSize: "0.85rem",
+              color: "var(--text-muted)",
+              margin: 0,
+            }}
+          >
+            © {new Date().getFullYear()} Abdullah Shaimy | Founder of NanoVext | All rights reserved.
           </p>
+          <div style={{ display: "flex", gap: 16, fontSize: "0.8rem", color: "var(--text-muted)" }}>
+            <Link 
+              href="/privacy-policy" 
+              style={{ color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}
+              onMouseEnter={(e) => e.currentTarget.style.color = "var(--text-primary)"}
+              onMouseLeave={(e) => e.currentTarget.style.color = "var(--text-muted)"}
+            >
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link 
+              href="/terms-conditions" 
+              style={{ color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}
+              onMouseEnter={(e) => e.currentTarget.style.color = "var(--text-primary)"}
+              onMouseLeave={(e) => e.currentTarget.style.color = "var(--text-muted)"}
+            >
+              Terms & Conditions
+            </Link>
+            <span>•</span>
+            <Link 
+              href="/refund-policy" 
+              style={{ color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}
+              onMouseEnter={(e) => e.currentTarget.style.color = "var(--text-primary)"}
+              onMouseLeave={(e) => e.currentTarget.style.color = "var(--text-muted)"}
+            >
+              Refund Policy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

@@ -151,3 +151,39 @@ VALUES (
 ON CONFLICT (sender_email) DO UPDATE 
 SET access_key = EXCLUDED.access_key,
     templates = EXCLUDED.templates;
+
+-- ====================================================================
+-- USER PROFILES & ROLES
+-- ====================================================================
+
+-- 6. Create Profiles table
+CREATE TABLE IF NOT EXISTS profiles (
+  id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  role TEXT NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'admin')),
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Enable RLS
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+
+-- Allow users to view their own profile, and admins to view all
+CREATE POLICY "Users can view own profile" ON profiles
+  FOR SELECT TO authenticated
+  USING (auth.uid() = id);
+
+-- Create a function to handle new user signups
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS trigger AS $$
+BEGIN
+  INSERT INTO public.profiles (id, role)
+  VALUES (new.id, 'user');
+  RETURN new;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Trigger the function every time a user is created
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+CREATE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();

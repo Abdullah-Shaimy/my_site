@@ -153,7 +153,7 @@ export default function Navbar() {
           </nav>
 
           {/* Right: CTA & Mobile Hamburger */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 12, gridColumn: 3 }}>
 
             {!loading && (
               user ? (

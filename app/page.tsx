@@ -14,6 +14,7 @@ const LiquidStats = dynamic(() => import("./components/LiquidStats"), {
 
 const socialLinks = [
   { href: "https://www.linkedin.com/in/abdullahshaimy/", icon: "/icons/linkedin.png", label: "LinkedIn" },
+  { href: "https://www.instagram.com/shaimy_twenty4/", icon: "/icons/instagram.png", label: "Instagram" },
   { href: "https://www.behance.net/abdullahshaimy/", icon: "/icons/behance.png", label: "Behance" },
 ];
 
@@ -26,6 +27,7 @@ const personLdJson = {
   knowsAbout: ["Next.js", "React", "UI/UX Design", "Brand Identity", "Web Development"],
   sameAs: [
     "https://www.linkedin.com/in/abdullahshaimy/",
+    "https://www.instagram.com/shaimy_twenty4/",
     "https://www.behance.net/abdullahshaimy/",
   ],
 };
