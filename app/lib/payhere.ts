@@ -70,8 +70,12 @@ export function verifyPayHereSignature(
 }
 
 export function getPayHereCheckoutUrl() {
-  const env = process.env.NEXT_PUBLIC_PAYHERE_ENV || "sandbox";
-  return env === "live"
+  const env = (process.env.PAYHERE_ENV || process.env.NEXT_PUBLIC_PAYHERE_ENV || "sandbox")
+    .toString()
+    .trim()
+    .toLowerCase();
+
+  return env === "live" || env === "production"
     ? "https://www.payhere.lk/pay/checkout"
     : "https://sandbox.payhere.lk/pay/checkout";
 }
