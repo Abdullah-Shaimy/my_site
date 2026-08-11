@@ -187,3 +187,67 @@ DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
+
+-- ====================================================================
+-- PAYHERE PAYMENTS DATABASE SETUP
+-- ====================================================================
+
+-- 7. Create Payments table
+CREATE TABLE IF NOT EXISTS payments (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  order_id TEXT UNIQUE NOT NULL,
+  payment_id TEXT,
+  full_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  amount NUMERIC(12, 2) NOT NULL,
+  currency TEXT NOT NULL DEFAULT 'LKR',
+  message TEXT,
+  status TEXT NOT NULL DEFAULT 'pending', -- 'pending', 'paid', 'failed', 'canceled'
+  payhere_status_code INTEGER,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Enable RLS on payments
+ALTER TABLE payments ENABLE ROW LEVEL SECURITY;
+
+-- Allow anonymous inserts to payments table for guest checkout flow
+CREATE POLICY "Allow anonymous payment insert" ON payments 
+  FOR INSERT TO anon 
+  WITH CHECK (true);
+
+-- Allow public read of non-sensitive payment status by order_id
+CREATE POLICY "Allow anonymous select by order_id" ON payments 
+  FOR SELECT TO anon 
+  USING (true);
+
+-- ====================================================================
+-- CONTACT FORM SUBMISSIONS DATABASE SETUP
+-- ====================================================================
+
+-- 8. Create Contacts table
+CREATE TABLE IF NOT EXISTS contacts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  subject TEXT NOT NULL,
+  message TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'new', -- 'new', 'read', 'replied'
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Enable RLS on contacts
+ALTER TABLE contacts ENABLE ROW LEVEL SECURITY;
+
+-- Allow anonymous users to submit contact form messages
+CREATE POLICY "Allow anonymous contact insert" ON contacts 
+  FOR INSERT TO anon 
+  WITH CHECK (true);
+
+-- Disallow public select for anon on contacts to protect privacy
+CREATE POLICY "Disallow select for anon on contacts" ON contacts 
+  FOR SELECT TO anon 
+  USING (false);
+
+

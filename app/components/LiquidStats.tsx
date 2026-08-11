@@ -92,9 +92,9 @@ const StatCard = ({ stat, index }: { stat: typeof statsData[0], index: number })
           >
             {stat.value}
           </motion.h3>
-          <p 
+          <p
             className="text-[0.65rem] md:text-[0.75rem] font-bold uppercase tracking-[0.2em] text-muted opacity-80"
-            style={{ 
+            style={{
               color: "var(--text-muted)",
               fontWeight: 700
             }}
@@ -104,7 +104,7 @@ const StatCard = ({ stat, index }: { stat: typeof statsData[0], index: number })
         </div>
 
         {/* Shine Sweep Effect */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-shine-sweep pointer-events-none"
           initial={false}
           animate={isHovered ? { x: "100%" } : { x: "-100%" }}
@@ -112,13 +112,13 @@ const StatCard = ({ stat, index }: { stat: typeof statsData[0], index: number })
         />
 
         {/* Bottom Refraction Line */}
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={{
             width: isHovered ? "60%" : "30%",
-            opacity: isHovered ? 0.8 : 0.2 
+            opacity: isHovered ? 0.8 : 0.2
           }}
           className="absolute bottom-4 h-[2px] rounded-full blur-[1px]"
-          style={{ 
+          style={{
             background: stat.color,
             boxShadow: `0 0 15px ${stat.color}`,
           }}

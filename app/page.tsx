@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import { ArrowRight, Briefcase } from "lucide-react";
 import AnimatedText from "./components/AnimatedText";
 import ScrollReveal from "./components/ScrollReveal";
+import HeroAvatarVisual from "./components/HeroAvatarVisual";
 const LiquidStats = dynamic(() => import("./components/LiquidStats"), {
   ssr: false,
 });
@@ -210,179 +211,14 @@ export default function HomePage() {
               </motion.div>
             </div>
 
-            {/* Right - Avatar */}
+            {/* Right - Interactive 3D Cyber Avatar */}
             <motion.div
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
               style={{ display: "flex", justifyContent: "center" }}
             >
-              <div style={{ position: "relative" }} className="animate-float">
-                {/* AI Circuits layer */}
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                  style={{
-                    position: "absolute",
-                    inset: -60,
-                    zIndex: -1,
-                    opacity: 0.7,
-                    pointerEvents: "none",
-                  }}
-                >
-                  <svg width="100%" height="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="circuitGrad" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#00d2ff" />
-                        <stop offset="50%" stopColor="#8b5cf6" />
-                        <stop offset="100%" stopColor="#8b5cf6" />
-                      </linearGradient>
-                    </defs>
-                    <g stroke="url(#circuitGrad)" strokeWidth="2" fill="none">
-                      {/* Inner rings */}
-                      <circle cx="250" cy="250" r="200" strokeDasharray="4 8" opacity="0.4" />
-                      <circle cx="250" cy="250" r="230" strokeDasharray="20 40 10 30" opacity="0.6" />
-                      
-                      {/* Connecting traces */}
-                      <path d="M 250 20 L 250 50 L 270 70" />
-                      <circle cx="250" cy="20" r="4" fill="#00d2ff" />
-                      <path d="M 480 250 L 450 250 L 430 230" />
-                      <circle cx="480" cy="250" r="4" fill="#8b5cf6" />
-                      <path d="M 250 480 L 250 450 L 230 430" />
-                      <circle cx="250" cy="480" r="4" fill="#00d2ff" />
-                      <path d="M 20 250 L 50 250 L 70 270" />
-                      <circle cx="20" cy="250" r="4" fill="#8b5cf6" />
-                      
-                      {/* Diagonals */}
-                      <path d="M 87 87 L 115 115 L 140 115" />
-                      <circle cx="87" cy="87" r="4" fill="#8b5cf6" />
-                      <path d="M 413 87 L 385 115 L 360 115" />
-                      <circle cx="413" cy="87" r="4" fill="#00d2ff" />
-                      <path d="M 87 413 L 115 385 L 140 385" />
-                      <circle cx="87" cy="413" r="4" fill="#8b5cf6" />
-                      <path d="M 413 413 L 385 385 L 360 385" />
-                      <circle cx="413" cy="413" r="4" fill="#8b5cf6" />
-
-                      {/* Nodes */}
-                      <circle cx="270" cy="70" r="2" fill="none" />
-                      <circle cx="430" cy="230" r="2" fill="none" />
-                      <circle cx="230" cy="430" r="2" fill="none" />
-                      <circle cx="70" cy="270" r="2" fill="none" />
-                      <circle cx="140" cy="115" r="2" fill="none" />
-                      <circle cx="360" cy="115" r="2" fill="none" />
-                      <circle cx="140" cy="385" r="2" fill="none" />
-                      <circle cx="360" cy="385" r="2" fill="none" />
-                    </g>
-                  </svg>
-                </motion.div>
-
-                {/* Outer glow ring */}
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: -20,
-                    borderRadius: "50%",
-                    background:
-                      "radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, transparent 70%)",
-                    animation: "glowPulse 3s ease-in-out infinite",
-                  }}
-                />
-                {/* Inner circling light border */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  style={{
-                    position: "absolute",
-                    inset: -5,
-                    borderRadius: "50%",
-                    background: "conic-gradient(from 0deg, transparent 70%, #00d2ff, #8b5cf6, #8b5cf6)",
-                    zIndex: 0,
-                  }}
-                />
-
-                {/* Avatar container with gradient border */}
-                <div
-                  style={{
-                    width: 320,
-                    height: 320,
-                    borderRadius: "50%",
-                    background: "var(--bg-primary)",
-                    padding: 4,
-                    boxShadow: "0 20px 60px rgba(0, 210, 255, 0.25)",
-                    overflow: "hidden",
-                    position: "relative",
-                    zIndex: 1,
-                  }}
-                >
-                  <Image
-                    src="/profile.jpg"
-                    alt="Professional Avatar"
-                    fill
-                    priority
-                    sizes="(max-width: 768px) 260px, 320px"
-                    onContextMenu={(e) => e.preventDefault()}
-                    onDragStart={(e) => e.preventDefault()}
-                    style={{
-                      borderRadius: "50%",
-                      objectFit: "cover",
-                      transform: "scale(1.1)",
-                      objectPosition: "center 0%",
-                      userSelect: "none",
-                    }}
-                  />
-                </div>
-
-                {/* Floating badges */}
-                <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  style={{
-                    position: "absolute",
-                    top: 30,
-                    right: -50,
-                    background: "var(--glass-bg)",
-                    backdropFilter: "blur(var(--glass-blur))",
-                    borderRadius: 12,
-                    padding: "8px 14px",
-                    boxShadow: "var(--shadow-md), inset 0 1px 1px -1px var(--glass-highlight)",
-                    border: "1px solid var(--glass-border)",
-                    fontSize: "0.82rem",
-                    fontWeight: 600,
-                    color: "var(--accent-blue)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                    zIndex: 10,
-                  }}
-                >
-                  <span>🚀</span> Developer
-                </motion.div>
-
-                <motion.div
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  style={{
-                    position: "absolute",
-                    bottom: 40,
-                    left: -40,
-                    background: "var(--glass-bg)",
-                    backdropFilter: "blur(var(--glass-blur))",
-                    borderRadius: 12,
-                    padding: "8px 14px",
-                    boxShadow: "var(--shadow-md), inset 0 1px 1px -1px var(--glass-highlight)",
-                    border: "1px solid var(--glass-border)",
-                    fontSize: "0.82rem",
-                    fontWeight: 600,
-                    color: "var(--accent-purple)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                    zIndex: 10,
-                  }}
-                >
-                  <span>🎨</span> Designer
-                </motion.div>
-              </div>
+              <HeroAvatarVisual />
             </motion.div>
           </div>
         </div>

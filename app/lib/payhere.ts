@@ -68,3 +68,11 @@ export function verifyPayHereSignature(
 
   return expectedHash === md5sig;
 }
+
+export function getPayHereCheckoutUrl() {
+  const env = process.env.NEXT_PUBLIC_PAYHERE_ENV || "sandbox";
+  return env === "live"
+    ? "https://www.payhere.lk/pay/checkout"
+    : "https://sandbox.payhere.lk/pay/checkout";
+}
+

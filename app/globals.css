@@ -12,36 +12,36 @@
   --text-primary: #0d0d1a;
   --text-secondary: #4a4a6a;
   --text-muted: #8888aa;
-  
+
   --glass-bg: rgba(255, 255, 255, 0.45);
   --glass-bg-hover: rgba(255, 255, 255, 0.6);
   --glass-border: rgba(139, 92, 246, 0.15);
   --glass-border-hover: rgba(139, 92, 246, 0.3);
   --glass-highlight: rgba(255, 255, 255, 0.2);
   --glass-blur: 24px;
-  
+
   --accent-blue: #00d2ff;
   --accent-purple: #8b5cf6;
   --accent-purple: #8b5cf6;
   --gradient-primary: linear-gradient(135deg, #00d2ff, #8b5cf6);
   --gradient-glow: linear-gradient(135deg, rgba(0, 210, 255, 0.12), rgba(139, 92, 246, 0.12));
   --gradient-mesh: radial-gradient(at 0% 0%, rgba(0, 210, 255, 0.08) 0, transparent 50%),
-                   radial-gradient(at 50% 0%, rgba(139, 92, 246, 0.08) 0, transparent 50%),
-                   radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.08) 0, transparent 50%),
-                   radial-gradient(at 0% 100%, rgba(0, 210, 255, 0.08) 0, transparent 50%),
-                   radial-gradient(at 50% 100%, rgba(139, 92, 246, 0.08) 0, transparent 50%),
-                   radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.08) 0, transparent 50%);
-  
+    radial-gradient(at 50% 0%, rgba(139, 92, 246, 0.08) 0, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.08) 0, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(0, 210, 255, 0.08) 0, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(139, 92, 246, 0.08) 0, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.08) 0, transparent 50%);
+
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.03);
   --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.1);
   --shadow-deep: 0 16px 48px rgba(0, 0, 0, 0.2);
-  
+
   --radius-sm: 12px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-xl: 32px;
-  
+
   --whatsapp-green: #25D366;
   --whatsapp-green-glass: rgba(37, 211, 102, 0.12);
   --whatsapp-green-glass-hover: rgba(37, 211, 102, 0.22);
@@ -58,24 +58,24 @@
   --text-primary: #f8f9ff;
   --text-secondary: #b4bada;
   --text-muted: #6b7280;
-  
+
   --glass-bg: rgba(20, 22, 35, 0.4);
   --glass-bg-hover: rgba(30, 33, 50, 0.5);
   --glass-border: rgba(255, 255, 255, 0.05);
   --glass-border-hover: rgba(255, 255, 255, 0.15);
   --glass-highlight: rgba(255, 255, 255, 0.18);
   --glass-blur: 32px;
-  
+
   --accent-blue: #00d2ff;
   --accent-purple: #8b5cf6;
   --gradient-primary: linear-gradient(135deg, #00d2ff, #8b5cf6);
   --gradient-glow: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(139, 92, 246, 0.2));
-  
+
   /* Highly saturated, localized glows for contrast - matching the Traider/bloom look */
   --gradient-mesh: radial-gradient(circle at 10% 10%, rgba(0, 210, 255, 0.25) 0%, transparent 45%),
-                   radial-gradient(circle at 90% 15%, rgba(139, 92, 246, 0.2) 0%, transparent 45%),
-                   radial-gradient(circle at 50% 85%, rgba(0, 210, 255, 0.3) 0%, transparent 55%),
-                   radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.15) 0%, transparent 45%);
+    radial-gradient(circle at 90% 15%, rgba(139, 92, 246, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(0, 210, 255, 0.3) 0%, transparent 55%),
+    radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.15) 0%, transparent 45%);
 
   --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 12px 40px rgba(0, 0, 0, 0.6);
@@ -106,7 +106,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-josefin), sans-serif;
   font-weight: 700;
   line-height: 1.2;
@@ -121,9 +126,9 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   /* Enhanced Liquid Edge: stronger inset highlights for depth */
-  box-shadow: var(--shadow-md), 
-              inset 0 0 0 1px var(--glass-highlight), 
-              inset 0 -2px 10px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-md),
+    inset 0 0 0 1px var(--glass-highlight),
+    inset 0 -2px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
   overflow: hidden;
@@ -157,8 +162,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .glass-card:hover {
   background: var(--glass-bg-hover);
-  box-shadow: var(--shadow-lg), 
-              inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-lg),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
   transform: translateY(-8px) scale(1.01);
   border-color: var(--glass-border-hover);
 }
@@ -173,9 +178,9 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-md), 
-              inset 0 1.5px 2px -1px var(--glass-highlight),
-              inset 0 -1px 2px -1px rgba(0,0,0,0.4);
+  box-shadow: var(--shadow-md),
+    inset 0 1.5px 2px -1px var(--glass-highlight),
+    inset 0 -1px 2px -1px rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
 }
@@ -250,7 +255,7 @@ h1, h2, h3, h4, h5, h6 {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 8px 32px rgba(139, 92, 246, 0.25),
-              inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -259,14 +264,12 @@ h1, h2, h3, h4, h5, h6 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.2) 45%,
-    rgba(255, 255, 255, 0.4) 50%,
-    rgba(255, 255, 255, 0.2) 55%,
-    transparent 70%
-  );
+  background: linear-gradient(120deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.2) 45%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.2) 55%,
+      transparent 70%);
   transform: translateX(-100%);
   transition: transform 0.6s;
   pointer-events: none;
@@ -276,7 +279,7 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--gradient-primary);
   transform: translateY(-2px);
   box-shadow: 0 12px 40px rgba(139, 92, 246, 0.4),
-              inset 0 1.5px 2px rgba(255, 255, 255, 0.4);
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.4);
 }
 
 .btn-primary:hover::before {
@@ -302,7 +305,7 @@ h1, h2, h3, h4, h5, h6 {
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
   box-shadow: var(--shadow-sm),
-              inset 0 1px 1px var(--glass-highlight);
+    inset 0 1px 1px var(--glass-highlight);
   position: relative;
   overflow: hidden;
 }
@@ -311,14 +314,12 @@ h1, h2, h3, h4, h5, h6 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.1) 45%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.1) 55%,
-    transparent 70%
-  );
+  background: linear-gradient(120deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 45%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.1) 55%,
+      transparent 70%);
   transform: translateX(-100%);
   transition: transform 0.6s;
   pointer-events: none;
@@ -329,7 +330,7 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--accent-purple);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md),
-              inset 0 1.5px 2px var(--glass-highlight);
+    inset 0 1.5px 2px var(--glass-highlight);
 }
 
 .btn-secondary:hover::before {
@@ -355,7 +356,7 @@ h1, h2, h3, h4, h5, h6 {
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
   box-shadow: 0 8px 32px rgba(37, 211, 102, 0.08),
-              inset 0 1px 1px var(--glass-highlight);
+    inset 0 1px 1px var(--glass-highlight);
   position: relative;
   overflow: hidden;
 }
@@ -364,14 +365,12 @@ h1, h2, h3, h4, h5, h6 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.12) 45%,
-    rgba(255, 255, 255, 0.25) 50%,
-    rgba(255, 255, 255, 0.12) 55%,
-    transparent 70%
-  );
+  background: linear-gradient(120deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.12) 45%,
+      rgba(255, 255, 255, 0.25) 50%,
+      rgba(255, 255, 255, 0.12) 55%,
+      transparent 70%);
   transform: translateX(-100%);
   transition: transform 0.6s;
   pointer-events: none;
@@ -506,18 +505,33 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-link:hover::after,
 .nav-link.active::after {
-  width: calc(100% - 32px); /* Subtracting the total horizontal padding (16px + 16px) */
+  width: calc(100% - 32px);
+  /* Subtracting the total horizontal padding (16px + 16px) */
 }
 
 /* ─── Animations ─────────────────────────────────────────────────────── */
 @keyframes glowPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 @keyframes fadeInUp {
@@ -525,6 +539,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -539,9 +554,11 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-secondary);
 }
+
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(#00d2ff, #8b5cf6);
   border-radius: 3px;
@@ -568,7 +585,7 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--accent-purple);
   background: var(--glass-bg-hover);
   box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12),
-              inset 0 1px 2px -1px var(--glass-highlight);
+    inset 0 1px 2px -1px var(--glass-highlight);
 }
 
 .form-input::placeholder {
@@ -608,7 +625,7 @@ h1, h2, h3, h4, h5, h6 {
   .section-padding {
     padding: 64px 0;
   }
-  
+
   .container-custom {
     padding: 0 16px;
   }
