@@ -65,8 +65,9 @@ export async function GET() {
       rates: computedToLkr,
       lastUpdated: new Date(lastFetchedTime).toISOString(),
     });
-  } catch (error: any) {
-    console.warn("Failed to fetch live exchange rates, using fallback:", error?.message);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn("Failed to fetch live exchange rates, using fallback:", message);
 
     // If cache already exists, reuse it even if expired
     if (cachedRates) {
