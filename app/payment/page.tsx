@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ShieldCheck,
@@ -11,13 +11,21 @@ import {
   Mail,
   Phone,
   FileText,
-  DollarSign,
   CheckCircle2,
   AlertCircle,
   Loader2,
   Sparkles,
+  RefreshCw,
+  Info,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import {
+  POPULAR_CURRENCIES,
+  OTHER_CURRENCIES,
+  DEFAULT_FALLBACK_TO_LKR_RATES,
+  calculatePaymentDetails,
+  GATEWAY_FEE_PERCENT,
+} from "../lib/currencies";
 
 export default function PaymentPage() {
   const [formData, setFormData] = useState({
@@ -29,8 +37,34 @@ export default function PaymentPage() {
     message: "",
   });
 
+  const [rates, setRates] = useState<Record<string, number>>(DEFAULT_FALLBACK_TO_LKR_RATES);
+  const [ratesLoading, setRatesLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  // Fetch live exchange rates on mount
+  useEffect(() => {
+    let isMounted = true;
+    async function fetchRates() {
+      try {
+        const res = await fetch("/api/currency/rates");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && data.rates && isMounted) {
+            setRates(data.rates);
+          }
+        }
+      } catch (err) {
+        console.warn("Using fallback exchange rates:", err);
+      } finally {
+        if (isMounted) setRatesLoading(false);
+      }
+    }
+    fetchRates();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -39,6 +73,34 @@ export default function PaymentPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errorMessage) setErrorMessage("");
   };
+
+  const getPhonePlaceholder = (currency: string) => {
+    switch (currency) {
+      case "USD":
+      case "CAD":
+        return "+1 555 123 4567";
+      case "GBP":
+        return "+44 7911 123456";
+      case "EUR":
+        return "+49 151 12345678";
+      case "AUD":
+        return "+61 412 345 678";
+      case "AED":
+        return "+971 50 123 4567";
+      case "SAR":
+        return "+966 50 123 4567";
+      case "INR":
+        return "+91 98765 43210";
+      case "SGD":
+        return "+65 9123 4567";
+      case "LKR":
+      default:
+        return "+94 77 123 4567";
+    }
+  };
+
+  // Real-time calculation of converted amounts and 3.3% transaction fee
+  const calc = calculatePaymentDetails(formData.amount, formData.currency, rates);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,11 +128,23 @@ export default function PaymentPage() {
     setLoading(true);
 
     try {
-      // 1. Call secure backend API to create payment order & generate PayHere hash
+      // Send converted LKR total (with 3.3% fee) to backend PayHere checkout
       const res = await fetch("/api/payhere/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          amount: calc.totalPayableLkr.toFixed(2),
+          currency: "LKR", // Merchant payout is in LKR
+          message: formData.message,
+          originalAmount: calc.inputAmount,
+          originalCurrency: calc.inputCurrency,
+          exchangeRate: calc.rateToLkr,
+          feeAmount: calc.feeInLkr.toFixed(2),
+          baseLkrAmount: calc.baseInLkr.toFixed(2),
+        }),
       });
 
       const data = await res.json();
@@ -120,11 +194,10 @@ export default function PaymentPage() {
     }
   };
 
-  const formattedAmountDisplay = () => {
-    const val = parseFloat(formData.amount);
-    if (isNaN(val) || val <= 0) return "0.00";
-    return val.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  };
+  const formattedLkrTotal = calc.totalPayableLkr.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
   return (
     <div
@@ -187,7 +260,7 @@ export default function PaymentPage() {
             }}
           >
             <Sparkles size={16} />
-            Direct Portfolio Payment Gateway
+            Direct Global Portfolio Payment Gateway
           </div>
 
           <h1
@@ -205,11 +278,11 @@ export default function PaymentPage() {
             style={{
               fontSize: "1.05rem",
               color: "var(--text-secondary, #94a3b8)",
-              maxWidth: "580px",
+              maxWidth: "600px",
               margin: "0 auto",
             }}
           >
-            Complete your project payment or milestone deposit quickly and securely. Powered by PayHere 256-bit encrypted checkout.
+            Accepting payments worldwide. Select your preferred currency, review real-time conversion to LKR, and pay securely via PayHere.
           </p>
         </motion.div>
 
@@ -356,7 +429,7 @@ export default function PaymentPage() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="+94 77 123 4567"
+                    placeholder={getPhonePlaceholder(formData.currency)}
                     required
                     style={{
                       width: "100%",
@@ -376,62 +449,130 @@ export default function PaymentPage() {
               </div>
 
               {/* Payment Amount & Currency */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 100px", gap: "12px" }}>
-                <div>
-                  <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#cbd5e1", marginBottom: "8px" }}>
-                    Payment Amount <span style={{ color: "#ef4444" }}>*</span>
-                  </label>
-                  <div style={{ position: "relative" }}>
-                    <DollarSign size={18} style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", color: "#64748b" }} />
-                    <input
-                      type="number"
-                      name="amount"
-                      value={formData.amount}
+              <div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 140px", gap: "12px" }}>
+                  <div>
+                    <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#cbd5e1", marginBottom: "8px" }}>
+                      Payment Amount <span style={{ color: "#ef4444" }}>*</span>
+                    </label>
+                    <div style={{ position: "relative" }}>
+                      <span
+                        style={{
+                          position: "absolute",
+                          left: "14px",
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          color: "#a78bfa",
+                          fontSize: "0.9rem",
+                          fontWeight: 700,
+                          pointerEvents: "none",
+                        }}
+                      >
+                        {calc.currencySymbol}
+                      </span>
+                      <input
+                        type="number"
+                        name="amount"
+                        value={formData.amount}
+                        onChange={handleChange}
+                        placeholder={calc.isLkr ? "e.g. 50000" : "e.g. 150"}
+                        min="1"
+                        step="any"
+                        required
+                        style={{
+                          width: "100%",
+                          padding: "12px 14px 12px 44px",
+                          borderRadius: "12px",
+                          background: "rgba(15, 23, 42, 0.6)",
+                          border: "1px solid rgba(255, 255, 255, 0.12)",
+                          color: "#fff",
+                          fontSize: "0.95rem",
+                          outline: "none",
+                          transition: "border-color 0.2s",
+                        }}
+                        onFocus={(e) => (e.target.style.borderColor = "#8b5cf6")}
+                        onBlur={(e) => (e.target.style.borderColor = "rgba(255, 255, 255, 0.12)")}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#cbd5e1", marginBottom: "8px" }}>
+                      Currency
+                    </label>
+                    <select
+                      name="currency"
+                      value={formData.currency}
                       onChange={handleChange}
-                      placeholder="e.g. 5000"
-                      min="1"
-                      step="any"
-                      required
                       style={{
                         width: "100%",
-                        padding: "12px 14px 12px 44px",
+                        padding: "12px 10px",
                         borderRadius: "12px",
-                        background: "rgba(15, 23, 42, 0.6)",
+                        background: "rgba(15, 23, 42, 0.8)",
                         border: "1px solid rgba(255, 255, 255, 0.12)",
                         color: "#fff",
-                        fontSize: "0.95rem",
+                        fontSize: "0.9rem",
+                        fontWeight: 600,
                         outline: "none",
-                        transition: "border-color 0.2s",
+                        cursor: "pointer",
                       }}
-                      onFocus={(e) => (e.target.style.borderColor = "#8b5cf6")}
-                      onBlur={(e) => (e.target.style.borderColor = "rgba(255, 255, 255, 0.12)")}
-                    />
+                    >
+                      <optgroup label="Popular Currencies">
+                        {POPULAR_CURRENCIES.map((c) => (
+                          <option key={c.code} value={c.code}>
+                            {c.code} ({c.symbol})
+                          </option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="All Global Currencies">
+                        {OTHER_CURRENCIES.map((c) => (
+                          <option key={c.code} value={c.code}>
+                            {c.code} ({c.symbol}) - {c.name}
+                          </option>
+                        ))}
+                      </optgroup>
+                    </select>
                   </div>
                 </div>
 
-                <div>
-                  <label style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "#cbd5e1", marginBottom: "8px" }}>
-                    Currency
-                  </label>
-                  <select
-                    name="currency"
-                    value={formData.currency}
-                    onChange={handleChange}
-                    style={{
-                      width: "100%",
-                      padding: "12px 12px",
-                      borderRadius: "12px",
-                      background: "rgba(15, 23, 42, 0.8)",
-                      border: "1px solid rgba(255, 255, 255, 0.12)",
-                      color: "#fff",
-                      fontSize: "0.95rem",
-                      outline: "none",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <option value="LKR">LKR (Rs)</option>
-                    <option value="USD">USD ($)</option>
-                  </select>
+                {/* Real-Time Conversion & Fee Hint Badge */}
+                <div
+                  style={{
+                    marginTop: "10px",
+                    padding: "9px 14px",
+                    borderRadius: "10px",
+                    background: "rgba(139, 92, 246, 0.08)",
+                    border: "1px solid rgba(139, 92, 246, 0.2)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    fontSize: "0.8rem",
+                    color: "#cbd5e1",
+                    flexWrap: "wrap",
+                    gap: "6px",
+                  }}
+                >
+                  {calc.isLkr ? (
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                      <span>🇱🇰</span>
+                      <span>Domestic Sri Lankan Rupee (LKR)</span>
+                    </div>
+                  ) : (
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                      <RefreshCw size={12} className={ratesLoading ? "animate-spin text-purple-400" : "text-purple-400"} />
+                      <span>
+                        Live Rate: 1 {calc.inputCurrency} ≈{" "}
+                        <strong style={{ color: "#a78bfa" }}>
+                          {calc.rateToLkr.toFixed(2)} LKR
+                        </strong>
+                      </span>
+                    </div>
+                  )}
+
+                  <div style={{ display: "flex", alignItems: "center", gap: "5px", color: "#10b981", fontSize: "0.76rem", fontWeight: 600 }}>
+                    <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#10b981" }} />
+                    +3.3% gateway transaction fee
+                  </div>
                 </div>
               </div>
 
@@ -482,9 +623,10 @@ export default function PaymentPage() {
                   fontWeight: 700,
                   cursor: loading ? "not-allowed" : "pointer",
                   display: "flex",
+                  flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
-                  gap: "10px",
+                  gap: "4px",
                   boxShadow: "0 10px 25px rgba(139, 92, 246, 0.35)",
                   transition: "all 0.2s ease",
                   opacity: loading ? 0.8 : 1,
@@ -497,15 +639,22 @@ export default function PaymentPage() {
                 }}
               >
                 {loading ? (
-                  <>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                     <Loader2 size={20} className="animate-spin" />
-                    Initializing PayHere...
-                  </>
+                    Initializing PayHere Checkout...
+                  </div>
                 ) : (
                   <>
-                    <Lock size={18} />
-                    Pay {formData.currency} {formattedAmountDisplay()} Now
-                    <ArrowRight size={18} />
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <Lock size={18} />
+                      Pay LKR {formattedLkrTotal} Now
+                      <ArrowRight size={18} />
+                    </div>
+                    <span style={{ fontSize: "0.75rem", fontWeight: 500, color: "rgba(255,255,255,0.85)" }}>
+                      {calc.isLkr
+                        ? "Includes 3.3% payment gateway processing fee"
+                        : `Equivalent to ${calc.currencySymbol}${calc.inputAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${calc.inputCurrency} + 3.3% transaction fee`}
+                    </span>
                   </>
                 )}
               </button>
@@ -551,16 +700,16 @@ export default function PaymentPage() {
                 Payment Summary
               </h3>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "14px", borderBottom: "1px solid rgba(255, 255, 255, 0.1)", paddingBottom: "20px", marginBottom: "20px" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.9rem", color: "#94a3b8" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px", borderBottom: "1px solid rgba(255, 255, 255, 0.1)", paddingBottom: "18px", marginBottom: "18px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.88rem", color: "#94a3b8" }}>
                   <span>Service Provider</span>
                   <span style={{ color: "#fff", fontWeight: 600 }}>Abdullah Shaimy</span>
                 </div>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.9rem", color: "#94a3b8" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.88rem", color: "#94a3b8" }}>
                   <span>Client Name</span>
                   <span style={{ color: "#fff", fontWeight: 500 }}>{formData.fullName || "—"}</span>
                 </div>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.9rem", color: "#94a3b8" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.88rem", color: "#94a3b8" }}>
                   <span>Project / Note</span>
                   <span style={{ color: "#fff", fontWeight: 500, maxWidth: "160px", textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" }}>
                     {formData.message || "Standard Payment"}
@@ -568,16 +717,82 @@ export default function PaymentPage() {
                 </div>
               </div>
 
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
-                <span style={{ fontSize: "0.95rem", color: "#cbd5e1", fontWeight: 600 }}>Total Payable</span>
-                <div style={{ textAlign: "right" }}>
-                  <span style={{ fontSize: "0.9rem", color: "#a78bfa", fontWeight: 700, marginRight: "4px" }}>
-                    {formData.currency}
-                  </span>
-                  <span style={{ fontSize: "2.1rem", fontWeight: 800, color: "#00d2ff" }}>
-                    {formattedAmountDisplay()}
+              {/* Fee and Conversion Breakdown */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px", borderBottom: "1px solid rgba(255, 255, 255, 0.1)", paddingBottom: "18px", marginBottom: "18px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.88rem", color: "#94a3b8" }}>
+                  <span>Client Entered Amount</span>
+                  <span style={{ color: "#e2e8f0", fontWeight: 600 }}>
+                    {calc.currencySymbol} {calc.inputAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {calc.inputCurrency}
                   </span>
                 </div>
+
+                {!calc.isLkr && (
+                  <>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.84rem", color: "#94a3b8" }}>
+                      <span>Live Exchange Rate</span>
+                      <span style={{ color: "#a78bfa", fontWeight: 500 }}>
+                        1 {calc.inputCurrency} = {calc.rateToLkr.toFixed(2)} LKR
+                      </span>
+                    </div>
+
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.88rem", color: "#94a3b8" }}>
+                      <span>Converted Subtotal (LKR)</span>
+                      <span style={{ color: "#fff", fontWeight: 600 }}>
+                        LKR {calc.baseInLkr.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      </span>
+                    </div>
+                  </>
+                )}
+
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "0.88rem", color: "#94a3b8" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                    Transaction Fee ({GATEWAY_FEE_PERCENT}%)
+                  </span>
+                  <span style={{ color: "#10b981", fontWeight: 600 }}>
+                    + LKR {calc.feeInLkr.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </span>
+                </div>
+              </div>
+
+              {/* Total Payable in LKR */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "12px" }}>
+                <div>
+                  <span style={{ fontSize: "0.95rem", color: "#cbd5e1", fontWeight: 600, display: "block" }}>
+                    Total Payable
+                  </span>
+                  <span style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
+                    Settled in Sri Lankan Rupees
+                  </span>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <span style={{ fontSize: "0.95rem", color: "#a78bfa", fontWeight: 700, marginRight: "5px" }}>
+                    LKR
+                  </span>
+                  <span style={{ fontSize: "2.1rem", fontWeight: 800, color: "#00d2ff" }}>
+                    {formattedLkrTotal}
+                  </span>
+                </div>
+              </div>
+
+              {/* Friendly Note for International Clients */}
+              <div
+                style={{
+                  padding: "10px 12px",
+                  borderRadius: "10px",
+                  background: "rgba(255, 255, 255, 0.04)",
+                  border: "1px solid rgba(255, 255, 255, 0.06)",
+                  fontSize: "0.76rem",
+                  color: "#94a3b8",
+                  lineHeight: 1.4,
+                  display: "flex",
+                  gap: "8px",
+                  alignItems: "flex-start",
+                }}
+              >
+                <Info size={14} color="#a78bfa" style={{ flexShrink: 0, marginTop: "2px" }} />
+                <span>
+                  Payouts are settled directly in <strong>LKR</strong>. All international cards (Visa, Mastercard, AMEX) are accepted and your bank will automatically process the LKR transaction.
+                </span>
               </div>
             </div>
 
